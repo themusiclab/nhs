@@ -1,0 +1,267 @@
+"ocm","type","est","cilo","cihi","p","category","group","ndocs"
+"ANY","null",42.65,32,54,0,"CHILDREN","Africa",233
+"ANY","nhs",86,NA,NA,NA,"CHILDREN","Africa",233
+"ANY","null",14.2244,8,22,0,"CHILDREN","Asia",215
+"ANY","nhs",34,NA,NA,NA,"CHILDREN","Asia",215
+"ANY","null",2.8006,0,6,0.9268,"CHILDREN","Europe",62
+"ANY","nhs",3,NA,NA,NA,"CHILDREN","Europe",62
+"ANY","null",1.4734,0,4,0.8616,"CHILDREN","Middle America and the Caribbean",37
+"ANY","nhs",2,NA,NA,NA,"CHILDREN","Middle America and the Caribbean",37
+"ANY","null",0.1764,0,1,0,"CHILDREN","Middle East",6
+"ANY","nhs",0,NA,NA,NA,"CHILDREN","Middle East",6
+"ANY","null",10.0982,5,16,0.0332,"CHILDREN","North America",102
+"ANY","nhs",17,NA,NA,NA,"CHILDREN","North America",102
+"ANY","null",7.6432,3,13,0.2284,"CHILDREN","South America",88
+"ANY","nhs",5,NA,NA,NA,"CHILDREN","South America",88
+"ANY","null",98.05,83,113,0,"DANCE","Africa",233
+"ANY","nhs",285,NA,NA,NA,"DANCE","Africa",233
+"ANY","null",35.994,25,47,0,"DANCE","Asia",215
+"ANY","nhs",162,NA,NA,NA,"DANCE","Asia",215
+"ANY","null",1.9174,0,5,0,"DANCE","Europe",62
+"ANY","nhs",20,NA,NA,NA,"DANCE","Europe",62
+"ANY","null",6.0996,2,11,0,"DANCE","Middle America and the Caribbean",37
+"ANY","nhs",17,NA,NA,NA,"DANCE","Middle America and the Caribbean",37
+"ANY","null",0.2074,0,1,0.0016,"DANCE","Middle East",6
+"ANY","nhs",3,NA,NA,NA,"DANCE","Middle East",6
+"ANY","null",75.7278,61.975,90,0,"DANCE","North America",102
+"ANY","nhs",284,NA,NA,NA,"DANCE","North America",102
+"ANY","null",30.5886,21,41,0,"DANCE","South America",88
+"ANY","nhs",183,NA,NA,NA,"DANCE","South America",88
+"ANY","null",204.6418,179,231,0,"RELIGION","Africa",233
+"ANY","nhs",287,NA,NA,NA,"RELIGION","Africa",233
+"ANY","null",472.514,439,507,0,"RELIGION","Asia",215
+"ANY","nhs",601,NA,NA,NA,"RELIGION","Asia",215
+"ANY","null",27.241,17,38,0,"RELIGION","Europe",62
+"ANY","nhs",93,NA,NA,NA,"RELIGION","Europe",62
+"ANY","null",73.0778,57,90,0,"RELIGION","Middle America and the Caribbean",37
+"ANY","nhs",146,NA,NA,NA,"RELIGION","Middle America and the Caribbean",37
+"ANY","null",0.6874,0,3,0.3156,"RELIGION","Middle East",6
+"ANY","nhs",2,NA,NA,NA,"RELIGION","Middle East",6
+"ANY","null",429.5418,392,467,0,"RELIGION","North America",102
+"ANY","nhs",608,NA,NA,NA,"RELIGION","North America",102
+"ANY","null",150.2844,126,176,0,"RELIGION","South America",88
+"ANY","nhs",351,NA,NA,NA,"RELIGION","South America",88
+"ANY","null",43.9254,31,57,0.6204,"HEALING","Africa",233
+"ANY","nhs",41,NA,NA,NA,"HEALING","Africa",233
+"ANY","null",188.7994,167,211,0,"HEALING","Asia",215
+"ANY","nhs",256,NA,NA,NA,"HEALING","Asia",215
+"ANY","null",14.1262,7,22,0.0048,"HEALING","Europe",62
+"ANY","nhs",27,NA,NA,NA,"HEALING","Europe",62
+"ANY","null",88.2402,71,106,0,"HEALING","Middle America and the Caribbean",37
+"ANY","nhs",186,NA,NA,NA,"HEALING","Middle America and the Caribbean",37
+"ANY","null",0.1762,0,2,0,"HEALING","Middle East",6
+"ANY","nhs",0,NA,NA,NA,"HEALING","Middle East",6
+"ANY","null",250.0206,221,280,0,"HEALING","North America",102
+"ANY","nhs",339,NA,NA,NA,"HEALING","North America",102
+"ANY","null",89.2628,72,108,0,"HEALING","South America",88
+"ANY","nhs",198,NA,NA,NA,"HEALING","South America",88
+"ANY","null",9.5136,4,15.0249999999996,0.0216,"LULLABIES","Africa",233
+"ANY","nhs",17,NA,NA,NA,"LULLABIES","Africa",233
+"ANY","null",4.121,1,8,4e-04,"LULLABIES","Asia",215
+"ANY","nhs",14,NA,NA,NA,"LULLABIES","Asia",215
+"ANY","null",1.7798,0,5,0.9324,"LULLABIES","Europe",62
+"ANY","nhs",2,NA,NA,NA,"LULLABIES","Europe",62
+"ANY","null",0.7534,0,3,0.0728,"LULLABIES","Middle America and the Caribbean",37
+"ANY","nhs",3,NA,NA,NA,"LULLABIES","Middle America and the Caribbean",37
+"ANY","null",0.1354,0,1,0,"LULLABIES","Middle East",6
+"ANY","nhs",0,NA,NA,NA,"LULLABIES","Middle East",6
+"ANY","null",9.6314,4,15,0.708,"LULLABIES","North America",102
+"ANY","nhs",9,NA,NA,NA,"LULLABIES","North America",102
+"ANY","null",6.9072,2,12,0.5868,"LULLABIES","South America",88
+"ANY","nhs",6,NA,NA,NA,"LULLABIES","South America",88
+"ANY","null",43.3332,32,55,0.9708,"LOVE","Africa",233
+"ANY","nhs",44,NA,NA,NA,"LOVE","Africa",233
+"ANY","null",48.051,36,61,0.2532,"LOVE","Asia",215
+"ANY","nhs",56,NA,NA,NA,"LOVE","Asia",215
+"ANY","null",4.6346,1,9,0,"LOVE","Europe",62
+"ANY","nhs",22,NA,NA,NA,"LOVE","Europe",62
+"ANY","null",1.8106,0,5,0.9184,"LOVE","Middle America and the Caribbean",37
+"ANY","nhs",2,NA,NA,NA,"LOVE","Middle America and the Caribbean",37
+"ANY","null",0.227,0,1,0,"LOVE","Middle East",6
+"ANY","nhs",0,NA,NA,NA,"LOVE","Middle East",6
+"ANY","null",9.1684,4,15,0.8468,"LOVE","North America",102
+"ANY","nhs",9,NA,NA,NA,"LOVE","North America",102
+"ANY","null",10.9108,5,18,0.0316000000000001,"LOVE","South America",88
+"ANY","nhs",5,NA,NA,NA,"LOVE","South America",88
+"ANY","null",121.3472,107,136,0.0068,"PLAY","Africa",233
+"ANY","nhs",142,NA,NA,NA,"PLAY","Africa",233
+"ANY","null",29.008,19,40,0,"PLAY","Asia",215
+"ANY","nhs",71,NA,NA,NA,"PLAY","Asia",215
+"ANY","null",4.883,1,10,0.0684,"PLAY","Europe",62
+"ANY","nhs",10,NA,NA,NA,"PLAY","Europe",62
+"ANY","null",10.2608,5,16,0.144,"PLAY","Middle America and the Caribbean",37
+"ANY","nhs",7,NA,NA,NA,"PLAY","Middle America and the Caribbean",37
+"ANY","null",0.249,0,2,0,"PLAY","Middle East",6
+"ANY","nhs",0,NA,NA,NA,"PLAY","Middle East",6
+"ANY","null",25.6172,16,36,0.008,"PLAY","North America",102
+"ANY","nhs",40,NA,NA,NA,"PLAY","North America",102
+"ANY","null",13.7866,7,22,0.5684,"PLAY","South America",88
+"ANY","nhs",12,NA,NA,NA,"PLAY","South America",88
+"ANY","null",49.5912,37,62,0,"PROCESSION","Africa",233
+"ANY","nhs",142,NA,NA,NA,"PROCESSION","Africa",233
+"ANY","null",87.1648,72,104,0,"PROCESSION","Asia",215
+"ANY","nhs",133,NA,NA,NA,"PROCESSION","Asia",215
+"ANY","null",7.7336,3,13,0,"PROCESSION","Europe",62
+"ANY","nhs",28,NA,NA,NA,"PROCESSION","Europe",62
+"ANY","null",7.8246,3,13,0.9224,"PROCESSION","Middle America and the Caribbean",37
+"ANY","nhs",8,NA,NA,NA,"PROCESSION","Middle America and the Caribbean",37
+"ANY","null",0.326,0,2,0,"PROCESSION","Middle East",6
+"ANY","nhs",0,NA,NA,NA,"PROCESSION","Middle East",6
+"ANY","null",12.725,7,20,0.002,"PROCESSION","North America",102
+"ANY","nhs",25,NA,NA,NA,"PROCESSION","North America",102
+"ANY","null",11.1058,6,17,0.0832,"PROCESSION","South America",88
+"ANY","nhs",17,NA,NA,NA,"PROCESSION","South America",88
+"ANY","null",111.1564,93,130,0,"MOURNING","Africa",233
+"ANY","nhs",277,NA,NA,NA,"MOURNING","Africa",233
+"ANY","null",114.1416,95,134,0.2684,"MOURNING","Asia",215
+"ANY","nhs",126,NA,NA,NA,"MOURNING","Asia",215
+"ANY","null",10.624,5,18,4e-04,"MOURNING","Europe",62
+"ANY","nhs",24,NA,NA,NA,"MOURNING","Europe",62
+"ANY","null",10.2788,5,16,0,"MOURNING","Middle America and the Caribbean",37
+"ANY","nhs",33,NA,NA,NA,"MOURNING","Middle America and the Caribbean",37
+"ANY","null",0.3452,0,2,0.038,"MOURNING","Middle East",6
+"ANY","nhs",3,NA,NA,NA,"MOURNING","Middle East",6
+"ANY","null",137.2502,116,159.025,0,"MOURNING","North America",102
+"ANY","nhs",193,NA,NA,NA,"MOURNING","North America",102
+"ANY","null",48.6728,36,62,0,"MOURNING","South America",88
+"ANY","nhs",161,NA,NA,NA,"MOURNING","South America",88
+"ANY","null",14.059,8,21,0,"WORK","Africa",233
+"ANY","nhs",36,NA,NA,NA,"WORK","Africa",233
+"ANY","null",13.3868,7,21,0,"WORK","Asia",215
+"ANY","nhs",31,NA,NA,NA,"WORK","Asia",215
+"ANY","null",3.1726,0,7,0,"WORK","Europe",62
+"ANY","nhs",14,NA,NA,NA,"WORK","Europe",62
+"ANY","null",2.8508,0,6,0.0888,"WORK","Middle America and the Caribbean",37
+"ANY","nhs",1,NA,NA,NA,"WORK","Middle America and the Caribbean",37
+"ANY","null",0.0576,0,1,0,"WORK","Middle East",6
+"ANY","nhs",0,NA,NA,NA,"WORK","Middle East",6
+"ANY","null",5.0658,1,10,0.0552,"WORK","North America",102
+"ANY","nhs",10,NA,NA,NA,"WORK","North America",102
+"ANY","null",7.6252,3,13,0.0024,"WORK","South America",88
+"ANY","nhs",17,NA,NA,NA,"WORK","South America",88
+"ANY","null",174.7646,156,194,0,"STORYTELLING","Africa",233
+"ANY","nhs",269,NA,NA,NA,"STORYTELLING","Africa",233
+"ANY","null",99.4134,84,116,0,"STORYTELLING","Asia",215
+"ANY","nhs",138,NA,NA,NA,"STORYTELLING","Asia",215
+"ANY","null",10.6804,5,17,0,"STORYTELLING","Europe",62
+"ANY","nhs",49,NA,NA,NA,"STORYTELLING","Europe",62
+"ANY","null",4.989,2,9,0.0264,"STORYTELLING","Middle America and the Caribbean",37
+"ANY","nhs",10,NA,NA,NA,"STORYTELLING","Middle America and the Caribbean",37
+"ANY","null",0.7158,0,3,0.0636,"STORYTELLING","Middle East",6
+"ANY","nhs",3,NA,NA,NA,"STORYTELLING","Middle East",6
+"ANY","null",50.2846,39,62,0.348,"STORYTELLING","North America",102
+"ANY","nhs",45,NA,NA,NA,"STORYTELLING","North America",102
+"ANY","null",166.6656,159,175,0.0668,"STORYTELLING","South America",88
+"ANY","nhs",160,NA,NA,NA,"STORYTELLING","South America",88
+"ANY","null",110.6908,93,129,4e-04,"PRAISE","Africa",233
+"ANY","nhs",142,NA,NA,NA,"PRAISE","Africa",233
+"ANY","null",54.2892,41,69,0.2488,"PRAISE","Asia",215
+"ANY","nhs",63,NA,NA,NA,"PRAISE","Asia",215
+"ANY","null",5.4186,2,10,0.9352,"PRAISE","Europe",62
+"ANY","nhs",6,NA,NA,NA,"PRAISE","Europe",62
+"ANY","null",11.95,6,19,0.9136,"PRAISE","Middle America and the Caribbean",37
+"ANY","nhs",12,NA,NA,NA,"PRAISE","Middle America and the Caribbean",37
+"ANY","null",1.0896,0,3,0.6316,"PRAISE","Middle East",6
+"ANY","nhs",1,NA,NA,NA,"PRAISE","Middle East",6
+"ANY","null",73.597,59,89,0.3728,"PRAISE","North America",102
+"ANY","nhs",67,NA,NA,NA,"PRAISE","North America",102
+"ANY","null",36.1796,26,47,0.6688,"PRAISE","South America",88
+"ANY","nhs",39,NA,NA,NA,"PRAISE","South America",88
+"ANY","null",33.8104,24,44,0,"GREETING","Africa",233
+"ANY","nhs",60,NA,NA,NA,"GREETING","Africa",233
+"ANY","null",33.5908,23,45,0,"GREETING","Asia",215
+"ANY","nhs",64,NA,NA,NA,"GREETING","Asia",215
+"ANY","null",7.6762,3,13,0,"GREETING","Europe",62
+"ANY","nhs",34,NA,NA,NA,"GREETING","Europe",62
+"ANY","null",4.6564,1,9,0.004,"GREETING","Middle America and the Caribbean",37
+"ANY","nhs",12,NA,NA,NA,"GREETING","Middle America and the Caribbean",37
+"ANY","null",0.3594,0,2,0.6124,"GREETING","Middle East",6
+"ANY","nhs",1,NA,NA,NA,"GREETING","Middle East",6
+"ANY","null",29.8846,21,40,0,"GREETING","North America",102
+"ANY","nhs",67,NA,NA,NA,"GREETING","North America",102
+"ANY","null",22.62,14,32,0,"GREETING","South America",88
+"ANY","nhs",52,NA,NA,NA,"GREETING","South America",88
+"ANY","null",14.1978,8,22,0.6836,"WAR","Africa",233
+"ANY","nhs",16,NA,NA,NA,"WAR","Africa",233
+"ANY","null",18.9186,11,27,0.5124,"WAR","Asia",215
+"ANY","nhs",22,NA,NA,NA,"WAR","Asia",215
+"ANY","null",3.1876,0,7,0.1472,"WAR","Europe",62
+"ANY","nhs",6,NA,NA,NA,"WAR","Europe",62
+"ANY","null",0.4,0,2,0,"WAR","Middle America and the Caribbean",37
+"ANY","nhs",0,NA,NA,NA,"WAR","Middle America and the Caribbean",37
+"ANY","null",0.2472,0,1,0,"WAR","Middle East",6
+"ANY","nhs",0,NA,NA,NA,"WAR","Middle East",6
+"ANY","null",159.1776,138,182,0.0751999999999999,"WAR","North America",102
+"ANY","nhs",140,NA,NA,NA,"WAR","North America",102
+"ANY","null",11.3766,6,18,0.8068,"WAR","South America",88
+"ANY","nhs",11,NA,NA,NA,"WAR","South America",88
+"ANY","null",48.5166,36,61,0,"MARRIAGE","Africa",233
+"ANY","nhs",133,NA,NA,NA,"MARRIAGE","Africa",233
+"ANY","null",82.3366,67,98,0,"MARRIAGE","Asia",215
+"ANY","nhs",126,NA,NA,NA,"MARRIAGE","Asia",215
+"ANY","null",7.5666,3,13,0,"MARRIAGE","Europe",62
+"ANY","nhs",27,NA,NA,NA,"MARRIAGE","Europe",62
+"ANY","null",6.9452,3,12,0.8872,"MARRIAGE","Middle America and the Caribbean",37
+"ANY","nhs",7,NA,NA,NA,"MARRIAGE","Middle America and the Caribbean",37
+"ANY","null",0.3068,0,2,0,"MARRIAGE","Middle East",6
+"ANY","nhs",0,NA,NA,NA,"MARRIAGE","Middle East",6
+"ANY","null",6.2552,2,11,0.3396,"MARRIAGE","North America",102
+"ANY","nhs",9,NA,NA,NA,"MARRIAGE","North America",102
+"ANY","null",6.8388,2,12,0.1676,"MARRIAGE","South America",88
+"ANY","nhs",11,NA,NA,NA,"MARRIAGE","South America",88
+"ANY","null",1.0746,0,3,0,"ENTERTAINMENT","Africa",233
+"ANY","nhs",9,NA,NA,NA,"ENTERTAINMENT","Africa",233
+"ANY","null",4.8282,1,9,0.414,"ENTERTAINMENT","Asia",215
+"ANY","nhs",7,NA,NA,NA,"ENTERTAINMENT","Asia",215
+"ANY","null",0.167,0,1,0.3156,"ENTERTAINMENT","Europe",62
+"ANY","nhs",1,NA,NA,NA,"ENTERTAINMENT","Europe",62
+"ANY","null",0.8794,0,3,0.7432,"ENTERTAINMENT","Middle America and the Caribbean",37
+"ANY","nhs",1,NA,NA,NA,"ENTERTAINMENT","Middle America and the Caribbean",37
+"ANY","null",0.0192,0,0,0,"ENTERTAINMENT","Middle East",6
+"ANY","nhs",0,NA,NA,NA,"ENTERTAINMENT","Middle East",6
+"ANY","null",6.4698,2,11,0.0012,"ENTERTAINMENT","North America",102
+"ANY","nhs",16,NA,NA,NA,"ENTERTAINMENT","North America",102
+"ANY","null",4.267,1,7,0.406,"ENTERTAINMENT","South America",88
+"ANY","nhs",6,NA,NA,NA,"ENTERTAINMENT","South America",88
+"ANY","null",51.9,40,65,0.0431999999999999,"GROUPBONDING","Africa",233
+"ANY","nhs",40,NA,NA,NA,"GROUPBONDING","Africa",233
+"ANY","null",37.5572,27,49,0.4656,"GROUPBONDING","Asia",215
+"ANY","nhs",34,NA,NA,NA,"GROUPBONDING","Asia",215
+"ANY","null",5.8538,2,11,0.0084,"GROUPBONDING","Europe",62
+"ANY","nhs",13,NA,NA,NA,"GROUPBONDING","Europe",62
+"ANY","null",11.2686,6,18,0.000399999999999956,"GROUPBONDING","Middle America and the Caribbean",37
+"ANY","nhs",2,NA,NA,NA,"GROUPBONDING","Middle America and the Caribbean",37
+"ANY","null",0.1744,0,1,0,"GROUPBONDING","Middle East",6
+"ANY","nhs",0,NA,NA,NA,"GROUPBONDING","Middle East",6
+"ANY","null",13.1436,7,20,0.1292,"GROUPBONDING","North America",102
+"ANY","nhs",19,NA,NA,NA,"GROUPBONDING","North America",102
+"ANY","null",18.4418,11,27,0.8456,"GROUPBONDING","South America",88
+"ANY","nhs",18,NA,NA,NA,"GROUPBONDING","South America",88
+"ANY","null",55.2756,43,68,0,"EMOTION","Africa",233
+"ANY","nhs",86,NA,NA,NA,"EMOTION","Africa",233
+"ANY","null",15.7624,9,24,0.324,"EMOTION","Asia",215
+"ANY","nhs",20,NA,NA,NA,"EMOTION","Asia",215
+"ANY","null",2.3636,0,6,0.0036,"EMOTION","Europe",62
+"ANY","nhs",8,NA,NA,NA,"EMOTION","Europe",62
+"ANY","null",1.7548,0,5,0,"EMOTION","Middle America and the Caribbean",37
+"ANY","nhs",0,NA,NA,NA,"EMOTION","Middle America and the Caribbean",37
+"ANY","null",0.025,0,0.0249999999996362,0,"EMOTION","Middle East",6
+"ANY","nhs",0,NA,NA,NA,"EMOTION","Middle East",6
+"ANY","null",14.9764,9,22,0,"EMOTION","North America",102
+"ANY","nhs",30,NA,NA,NA,"EMOTION","North America",102
+"ANY","null",12.7026,7,20,0.0012,"EMOTION","South America",88
+"ANY","nhs",26,NA,NA,NA,"EMOTION","South America",88
+"ANY","null",22.8756,15,31,0.5392,"RITUAL","Africa",233
+"ANY","nhs",26,NA,NA,NA,"RITUAL","Africa",233
+"ANY","null",20.5954,13,30,0,"RITUAL","Asia",215
+"ANY","nhs",56,NA,NA,NA,"RITUAL","Asia",215
+"ANY","null",4.6384,1,9,8e-04,"RITUAL","Europe",62
+"ANY","nhs",13,NA,NA,NA,"RITUAL","Europe",62
+"ANY","null",2.4654,0,6,0.544,"RITUAL","Middle America and the Caribbean",37
+"ANY","nhs",2,NA,NA,NA,"RITUAL","Middle America and the Caribbean",37
+"ANY","null",0.2762,0,2,0.4908,"RITUAL","Middle East",6
+"ANY","nhs",1,NA,NA,NA,"RITUAL","Middle East",6
+"ANY","null",11.3304,6,18,0.0048,"RITUAL","North America",102
+"ANY","nhs",21,NA,NA,NA,"RITUAL","North America",102
+"ANY","null",2.6262,0,6,0,"RITUAL","South America",88
+"ANY","nhs",10,NA,NA,NA,"RITUAL","South America",88

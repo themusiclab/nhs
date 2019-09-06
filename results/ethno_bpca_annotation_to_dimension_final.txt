@@ -1,0 +1,129 @@
+
+================================================================================
+
+DIMENSION 1
+
+                                                        miss       freq   est   se     z
+audience_logage                                    0.7362497         NA -0.69 0.08 -8.60
+singer_logage                                      0.6487577         NA -0.67 0.08 -7.95
+singer_age_adult                                   0.6487577 0.67593712 -0.32 0.04 -7.45
+ceremony                                           0.3450839 0.65077821 -0.32 0.05 -7.02
+audience_logsize                                   0.6978127         NA -0.51 0.08 -6.80
+ocm_religious.practices.religious.experiences.p... 0.1267785 0.31298638 -0.33 0.06 -5.91
+instrument                                         0.0000000 0.16967509 -0.22 0.04 -5.51
+religious                                          0.0000000 0.25589297 -0.27 0.05 -5.09
+singers_leader                                     0.5640263 0.29274233 -0.22 0.05 -4.54
+singer_sex_male                                    0.4582714 0.70560564 -0.09 0.02 -4.45
+ocm_spectacles                                     0.1267785 0.08900778 -0.17 0.04 -4.11
+appear                                             0.0000000 0.05967297 -0.14 0.03 -4.11
+singer_age_elder                                   0.6487577 0.07255139 -0.14 0.03 -4.00
+ocm_religious.beliefs.cosmology.spirits.gods.sa... 0.1267785 0.07174125 -0.17 0.04 -3.91
+ocm_status.role.and.prestige                       0.1267785 0.05179961 -0.10 0.03 -3.87
+ocm_dance                                          0.1267785 0.14688716 -0.15 0.05 -3.30
+ocm_intra.community.relations                      0.1267785 0.05131323 -0.12 0.04 -3.10
+singers_dance                                      0.6808240 0.54690619 -0.20 0.06 -3.04
+singers_multiple                                   0.3707794 0.65642929 -0.08 0.03 -3.04
+audience_dance                                     0.7712890 0.35004643 -0.24 0.09 -2.79
+ocm_cultural.identity.and.pride                    0.1267785 0.07928016 -0.11 0.05 -2.35
+ocm_sickness.medical.care.and.shamans              0.1267785 0.05933852 -0.07 0.03 -2.13
+audience_sex_female                                0.7980463 0.83385910 -0.06 0.04 -1.38
+ocm_death.burials.funerals.mourning.               0.1267785 0.09484436 -0.03 0.03 -0.90
+ocm_socialization.and.education                    0.1267785 0.06152724 -0.01 0.03 -0.51
+audience_sex_male                                  0.7980463 0.81388013  0.03 0.04  0.86
+restrict                                           0.0000000 0.19133574  0.04 0.02  1.81
+ocm_communication                                  0.1267785 0.08827821  0.12 0.04  3.27
+singer_age_adolescent.young.adult                  0.6487577 0.18500605  0.36 0.08  4.38
+singer_age_child                                   0.6487577 0.12877872  0.98 0.21  4.57
+singer_sex_female                                  0.4582714 0.54841239  0.11 0.02  4.77
+ocm_drives.and.emotions                            0.1267785 0.12743191  0.15 0.03  4.91
+compose                                            0.6419622 0.48517200  0.25 0.04  5.51
+ocm_interpersonal.relations.includes.love.         0.1267785 0.10262646  0.34 0.05  6.73
+audience_child                                     0.7362497 0.09098229  0.60 0.09  6.98
+informal                                           0.3629221 0.24333333  0.45 0.06  7.25
+child_by                                           0.0000000 0.06455723  0.57 0.07  8.06
+
+================================================================================
+
+DIMENSION 2
+
+                                                        miss       freq   est   se     z
+ocm_dance                                          0.1267785 0.14688716 -0.43 0.06 -7.53
+appear                                             0.0000000 0.05967297 -0.30 0.04 -7.43
+instrument                                         0.0000000 0.16967509 -0.30 0.04 -7.33
+singers_multiple                                   0.3707794 0.65642929 -0.21 0.03 -6.62
+singers_leader                                     0.5640263 0.29274233 -0.30 0.05 -6.13
+ocm_socialization.and.education                    0.1267785 0.06152724 -0.22 0.04 -6.07
+singers_dance                                      0.6808240 0.54690619 -0.45 0.07 -5.96
+child_by                                           0.0000000 0.06455723 -0.27 0.05 -5.90
+audience_logsize                                   0.6978127         NA -0.37 0.06 -5.85
+audience_dance                                     0.7712890 0.35004643 -0.58 0.10 -5.67
+ocm_religious.practices.religious.experiences.p... 0.1267785 0.31298638 -0.20 0.04 -5.31
+ceremony                                           0.3450839 0.65077821 -0.15 0.03 -5.05
+singer_age_child                                   0.6487577 0.12877872 -0.88 0.20 -4.45
+restrict                                           0.0000000 0.19133574 -0.11 0.02 -4.26
+singer_sex_female                                  0.4582714 0.54841239 -0.07 0.02 -2.96
+audience_sex_female                                0.7980463 0.83385910 -0.08 0.03 -2.23
+religious                                          0.0000000 0.25589297 -0.06 0.03 -1.87
+audience_child                                     0.7362497 0.09098229 -0.09 0.05 -1.69
+ocm_cultural.identity.and.pride                    0.1267785 0.07928016 -0.02 0.04 -0.61
+ocm_spectacles                                     0.1267785 0.08900778  0.00 0.03 -0.04
+singer_sex_male                                    0.4582714 0.70560564  0.01 0.02  0.46
+audience_logage                                    0.7362497         NA  0.03 0.05  0.64
+ocm_religious.beliefs.cosmology.spirits.gods.sa... 0.1267785 0.07174125  0.03 0.03  0.86
+singer_age_adolescent.young.adult                  0.6487577 0.18500605  0.08 0.06  1.41
+audience_sex_male                                  0.7980463 0.81388013  0.06 0.03  1.77
+ocm_intra.community.relations                      0.1267785 0.05131323  0.09 0.03  2.57
+singer_age_adult                                   0.6487577 0.67593712  0.09 0.03  3.05
+ocm_sickness.medical.care.and.shamans              0.1267785 0.05933852  0.10 0.03  3.17
+singer_age_elder                                   0.6487577 0.07255139  0.13 0.04  3.48
+ocm_drives.and.emotions                            0.1267785 0.12743191  0.12 0.03  4.16
+ocm_status.role.and.prestige                       0.1267785 0.05179961  0.12 0.03  4.21
+ocm_death.burials.funerals.mourning.               0.1267785 0.09484436  0.15 0.04  4.22
+informal                                           0.3629221 0.24333333  0.19 0.04  5.15
+compose                                            0.6419622 0.48517200  0.24 0.04  5.49
+ocm_interpersonal.relations.includes.love.         0.1267785 0.10262646  0.21 0.04  5.91
+singer_logage                                      0.6487577         NA  0.40 0.06  6.40
+ocm_communication                                  0.1267785 0.08827821  0.26 0.04  6.83
+
+================================================================================
+
+DIMENSION 3
+
+                                                        miss       freq   est   se     z
+religious                                          0.0000000 0.25589297 -0.40 0.05 -7.86
+ocm_religious.beliefs.cosmology.spirits.gods.sa... 0.1267785 0.07174125 -0.34 0.05 -7.34
+ocm_religious.practices.religious.experiences.p... 0.1267785 0.31298638 -0.31 0.04 -7.16
+ocm_death.burials.funerals.mourning.               0.1267785 0.09484436 -0.24 0.04 -6.32
+ocm_sickness.medical.care.and.shamans              0.1267785 0.05933852 -0.24 0.04 -6.31
+restrict                                           0.0000000 0.19133574 -0.14 0.03 -5.43
+ocm_drives.and.emotions                            0.1267785 0.12743191 -0.13 0.03 -5.01
+ceremony                                           0.3450839 0.65077821 -0.11 0.03 -4.31
+singer_age_child                                   0.6487577 0.12877872 -0.75 0.19 -4.04
+singer_age_elder                                   0.6487577 0.07255139 -0.19 0.06 -3.23
+audience_child                                     0.7362497 0.09098229 -0.09 0.05 -1.79
+singer_age_adult                                   0.6487577 0.67593712 -0.03 0.03 -0.93
+audience_logage                                    0.7362497         NA -0.03 0.05 -0.69
+singer_sex_male                                    0.4582714 0.70560564  0.00 0.02 -0.12
+child_by                                           0.0000000 0.06455723  0.01 0.04  0.21
+appear                                             0.0000000 0.05967297  0.01 0.03  0.58
+singer_logage                                      0.6487577         NA  0.03 0.05  0.62
+compose                                            0.6419622 0.48517200  0.02 0.03  0.78
+audience_sex_male                                  0.7980463 0.81388013  0.04 0.03  1.33
+singer_sex_female                                  0.4582714 0.54841239  0.04 0.02  1.64
+ocm_status.role.and.prestige                       0.1267785 0.05179961  0.04 0.02  1.68
+singers_leader                                     0.5640263 0.29274233  0.06 0.03  1.88
+singers_multiple                                   0.3707794 0.65642929  0.04 0.02  1.95
+audience_logsize                                   0.6978127         NA  0.09 0.05  2.04
+audience_sex_female                                0.7980463 0.83385910  0.07 0.03  2.11
+instrument                                         0.0000000 0.16967509  0.07 0.03  2.80
+ocm_socialization.and.education                    0.1267785 0.06152724  0.08 0.03  3.22
+audience_dance                                     0.7712890 0.35004643  0.29 0.08  3.69
+singers_dance                                      0.6808240 0.54690619  0.24 0.05  4.36
+ocm_communication                                  0.1267785 0.08827821  0.13 0.03  4.63
+ocm_dance                                          0.1267785 0.14688716  0.18 0.04  4.93
+informal                                           0.3629221 0.24333333  0.19 0.04  5.13
+ocm_interpersonal.relations.includes.love.         0.1267785 0.10262646  0.18 0.03  5.51
+singer_age_adolescent.young.adult                  0.6487577 0.18500605  0.62 0.11  5.79
+ocm_intra.community.relations                      0.1267785 0.05131323  0.30 0.04  7.24
+ocm_spectacles                                     0.1267785 0.08900778  0.35 0.05  7.68
+ocm_cultural.identity.and.pride                    0.1267785 0.07928016  0.44 0.05  7.94
