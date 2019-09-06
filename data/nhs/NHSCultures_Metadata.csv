@@ -1,0 +1,118 @@
+id_nhs,nhs_region,culture,id_glottolog,id_ea,id_binford,id_hraf,id_sccs,id_chirila,id_wnai,id_dplace,id_ea_exact,id_binford_exact,id_chirila_exact,id_wnai_exact,id_notes,glotto_family,glotto_name,ow_nw
+NHS-C001,NHS-R13,Kapauku,ekar1243,Ie1,.,OJ29,94,.,,1,1,.,.,.,.,nucl1709,Ekari,NW
+NHS-C002,NHS-R11,Iroquois,iroq1247,Ng10,.,NM09,.,.,,1,1,.,.,.,.,iroq1247,Iroquoian,NW
+NHS-C003,NHS-R27,Bemba,town1238,Ac3,.,FQ05,7,.,,1,1,.,.,.,.,atla1278,Town Bemba,OW
+NHS-C004,NHS-R24,Garo,garo1247,Ei1,.,AR05,69,.,,1,1,.,.,.,.,sino1245,Garo,OW
+NHS-C005,NHS-R28,Alacaluf,qawa1238,Sg5,B53,.,.,.,,1,1,1,.,.,.,kawe1237,Qawasqar,NW
+NHS-C006,NHS-R13,Trobriands,kili1267,Ig2,.,OL06,98,.,,1,1,.,.,.,.,aust1307,Kilivila,NW
+NHS-C007,NHS-R23,Saami,lule1254,Cg4,.,EP04,52,.,,1,1,.,.,.,.,ural1272,Lule Saami,OW
+NHS-C008,NHS-R25,Ifugao,bata1298,Ia3,.,OA19,112,.,,1,1,.,.,.,.,aust1307,Batad Ifugao,OW
+NHS-C009,NHS-R01,Saramaka,sara1340,Sc6,.,SR15,165,.,,1,1,.,.,.,.,indo1319,Saramaccan,NW
+NHS-C010,NHS-R08,Bai,cent2004,Ed8,.,.,.,.,,1,1,.,.,.,.,sino1245,Central Bai,OW
+NHS-C011,NHS-R30,Kanuri,mang1399,Cb19,.,MS14,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,saha1256,Manga Kanuri,OW
+NHS-C012,NHS-R01,JavaÃ©,java1255,.,.,.,.,.,,0,.,.,.,.,.,nucl1710,Javaé,NW
+NHS-C013,NHS-R24,Uttar Pradesh,bhoj1244,Ef11,.,AW19,63,.,,1,1,.,.,.,.,indo1319,Bhojpuri,OW
+NHS-C014,NHS-R22,Tikopia,tiko1237,Ii2,.,OT11,100,.,,1,1,.,.,.,.,aust1307,Tikopia,NW
+NHS-C015,NHS-R29,Quechan,quec1382,Nh22,.,.,.,.,J141,1,1,.,.,1,.,coch1271,Quechan,NW
+NHS-C016,NHS-R16,Chukchee,chuk1273,Ec3,.,RY02,121,.,,1,1,.,.,.,.,chuk1271,Chukchi,OW
+NHS-C017,NHS-R09,Ganda,gand1255,Ad7,.,FK07,12,.,,1,1,.,.,.,.,atla1278,Ganda,OW
+NHS-C018,NHS-R30,Fut,bafu1246,Ae9,.,.,.,.,,1,1,.,.,.,.,atla1278,Bafut,OW
+NHS-C019,NHS-R22,Hawaiians,hawa1245,Ij6,.,OV05,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,aust1307,Hawaiian,NW
+NHS-C020,NHS-R12,Maya (Yucatan Peninsula),yuca1254,.,.,NV10,.,.,,0,.,.,.,.,D-PLACE (and EA) includes an entry for the Yucatec Maya at the time of conquest (1520),maya1287,Yucatec Maya,NW
+NHS-C021,NHS-R09,Nyangatom,nyan1315,Aj24,.,.,.,.,,0,0,.,.,.,"EA refers to the Toposa, another group of the Karamajong cluster who, some claim, share a recent ancestor with Nyangatom",nilo1247,Nyangatom,OW
+NHS-C022,NHS-R28,Ona,onaa1245,Sg3,B54,SH04,.,.,,1,1,1,.,.,.,chon1288,Selk'nam,NW
+NHS-C023,NHS-R26,Serbs,serb1264,Ch1,.,EF06,.,.,,1,1,.,.,.,.,indo1319,Serbian Standard,OW
+NHS-C024,NHS-R25,Eastern Toraja,pamo1252,Ic5,.,OG11,87,.,,0,0,.,.,.,EA refers to Western Toraja,aust1307,Pamona,OW
+NHS-C025,NHS-R17,Tunisians,tuni1260,Cd21,.,.,.,.,,1,1,.,.,.,The song we have is sung by the descendants of sub-Saharan slaves,afro1255,Tunis (Tunisian Arabic),OW
+NHS-C026,NHS-R20,Goajiro,wayu1243,Sb6,.,SC13,159,.,,1,1,.,.,.,.,araw1281,Wayuu,NW
+NHS-C027,NHS-R24,Andamans,grea1241|jara1244,Eh1,B5|B6|B8,AZ02,79,.,,1,0,0,.,.,Combines several D-PLACE entries,,,OW
+NHS-C028,NHS-R27,Lunda,lund1266,Ac6,.,.,.,.,,1,1,.,.,.,"the EA entry is for the Ndembu, a sub-group of the Lunda",atla1278,Lunda,OW
+NHS-C029,NHS-R10,Bahia Brazilians,braz1246,Cf4,.,SO11,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,indo1319,Brazilian Portuguese,NW
+NHS-C030,NHS-R16,Nenets,nene1249,Ec4,.,RU41,53,.,,1,1,.,.,.,D-PLACE also includes the HRAF code RU04 (Samoyed),ural1272,Tundra Nenets,OW
+NHS-C031,NHS-R06,EmberÃ¡,nort2972,Sa4,.,.,.,.,,1,1,.,.,.,.,choc1280,Northern Emberá,NW
+NHS-C032,NHS-R05,Azande,zand1248,Ai3,.,FO07,28,.,,1,1,.,.,.,.,atla1278,Zande,OW
+NHS-C033,NHS-R10,Guarani,tupi1282|west2640,Sh7|Sj10,.,SM04,181,.,,1,0,.,.,.,Combines several D-PLACE entries,tupi1275,,NW
+NHS-C034,NHS-R03,Lardil,lard1243,.,B102,.,.,.,,1,.,1,.,.,.,tang1340,Lardil,NW
+NHS-C035,NHS-R30,Ewe,aguu1242,Af36,.,.,.,.,,1,1,.,.,.,.,atla1278,Agu (Ewe),OW
+NHS-C036,NHS-R21,Blackfoot,pieg1239,Ne12,B256,NF06,.,.,,1,1,1,.,.,.,algi1248,Piegan,NW
+NHS-C037,NHS-R15,Kurds,cent1972,Ci11,.,MA11,57,.,,1,1,.,.,.,.,indo1319,Central Kurdish,OW
+NHS-C038,NHS-R27,Chewa,chew1246,Ac10,.,.,.,.,,1,1,.,.,.,.,atla1278,Chewa,OW
+NHS-C039,NHS-R13,Anggor,ango1254,.,.,.,.,.,,0,.,.,.,.,.,sena1264,Angor,NW
+NHS-C040,NHS-R20,Chachi,chac1249,Sf3,.,SD06,168,.,,1,1,.,.,.,.,barb1265,Cha'palaa,NW
+NHS-C041,NHS-R24,Marathi,mara1378,.,.,.,.,.,,0,.,.,.,.,.,indo1319,Marathi,OW
+NHS-C042,NHS-R02,Ojibwa,ojib1241,Ne13|Na35|Na36|Na38|Na39,B254|B327|B328|B335|B337|B339,NG06,.,.,,1,0,0,.,.,Combines several D-PLACE entries,algi1248,Ojibwa,NW
+NHS-C043,NHS-R03,Iwaidja,iway1238,.,.,.,.,.,,0,.,.,.,.,.,iwai1246,Iwaydja,NW
+NHS-C044,NHS-R17,Gourara,gour1247,Cd10,.,.,.,.,,0,0,.,.,.,"EA refers to Zekara, another Zenati-speaking nomadic Berber tribe in northwest Africa",afro1255,Gourara,OW
+NHS-C045,NHS-R05,Rwandans,kiny1244,Ae10,.,FO57,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,atla1278,Kinyarwanda,OW
+NHS-C046,NHS-R25,Meratus,buki1247,.,.,.,.,.,,0,.,.,.,.,.,aust1307,Bukit Malay,OW
+NHS-C047,NHS-R22,Samoans,samo1305,Ii14,.,OU08,106,.,,1,1,.,.,.,.,aust1307,Samoan,NW
+NHS-C048,NHS-R30,Wolof,nucl1347,Cb2,.,MS30,21,.,,1,1,.,.,.,.,atla1278,Wolof,OW
+NHS-C049,NHS-R19,Haida,nort2983,Nb1,B290,.,131,.,J3,1,1,1,.,.,.,guai1249,Northern Toba,NW
+NHS-C050,NHS-R24,Sinhalese,sinh1246,Eh6,.,AX04,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,indo1319,Sinhala,OW
+NHS-C051,NHS-R01,Ye'kuana,maqu1238,Sc16,.,.,.,.,,1,1,.,.,.,.,cari1283,Maquiritari,NW
+NHS-C052,NHS-R22,Lau Fijians,laua1243,lh14,.,OQ06,.,.,,1,0,.,.,.,D-PLACE entry does not include HRAF code,aust1307,Lauan,NW
+NHS-C053,NHS-R30,Fulani,fula1264,Cb8|Cb24,.,.,25,.,,1,0,.,.,.,Combines several D-PLACE entries,atla1278,Fula,OW
+NHS-C054,NHS-R27,Zulu,zulu1248,Ab12,.,FX20,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,atla1278,Zulu,OW
+NHS-C055,NHS-R12,Tzeltal,tzel1254,Sa2,.,NV09,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,maya1287,Tzeltal,NW
+NHS-C056,NHS-R09,Somali,nort3051,Ca2,.,MO04,36,.,,1,1,.,.,.,.,afro1255,Northern Somali,OW
+NHS-C057,NHS-R02,Iglulik Inuit,west2618,Na22,B384,.,.,.,,1,1,1,.,.,.,eski1264,Western Canadian Inuktitut,NW
+NHS-C058,NHS-R21,Klamath,klam1254,Nc8,B189,NR10,138,.,J112,1,1,1,.,1,.,,Klamath-Modoc,NW
+NHS-C059,NHS-R17,Libyan Bedouin,liby1240,Cd20,.,MT09,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,afro1255,Libyan Arabic,OW
+NHS-C060,NHS-R06,Garifuna,gari1256,Sa7,.,SA12,.,.,,1,1,.,.,.,.,araw1281,Garifuna,NW
+NHS-C061,NHS-R26,Georgia,imer1248,Ci8,.,RI01,.,.,,1,1,.,.,.,.,kart1248,Imeretian,OW
+NHS-C062,NHS-R13,Melpa,melp1238,.,.,.,.,.,,0,.,.,.,.,.,nucl1709,Melpa,NW
+NHS-C063,NHS-R12,Nahua,west2809|east2720,.,.,NU46,.,.,,0,.,.,.,.,"D-PLACE (and EA) also include entries for Aztec, but this from time of conquest (1520)",utoa1244,,NW
+NHS-C064,NHS-R14,Chuuk,chuu1238,If2,.,OR19,109,.,,1,1,.,.,.,.,aust1307,Chuukese,NW
+NHS-C065,NHS-R07,Otavalo Quichua,imba1240,.,.,SD16,.,.,,0,.,.,.,.,.,quec1387,Imbabura Highland Quichua,NW
+NHS-C066,NHS-R30,Hausa,araw1280,Cb26,.,MS12,26,.,,1,1,.,.,.,.,afro1255,Arawa,OW
+NHS-C067,NHS-R29,Hopi,hopi1249,Nh18,.,NT09,.,.,J159,1,1,.,.,1,.,utoa1244,Hopi,NW
+NHS-C068,NHS-R27,Lozi,lozi1239,Ab3,.,FQ09,4,.,,1,1,.,.,.,.,atla1278,Lozi,OW
+NHS-C069,NHS-R11,Mi'kmaq,mikm1235,Na41,B329,NJ05,126,.,,1,1,1,.,.,.,algi1248,Mi'kmaq,NW
+NHS-C070,NHS-R21,Pawnee,pawn1254,Nf6,B189,NQ18,.,.,,1,1,1,.,.,.,cadd1255,Pawnee,NW
+NHS-C071,NHS-R25,Kelabit,kela1258,.,.,.,.,.,,0,.,.,.,.,.,aust1307,Kelabit,OW
+NHS-C072,NHS-R08,Ainu,ainu1240,Ec7,B22,AB06,118,.,,1,1,1,.,.,.,ainu1252,Hokkaido Ainu,OW
+NHS-C073,NHS-R30,Tiv,tivv1240,Ah3,.,FF57,16,.,,1,1,.,.,.,.,atla1278,Tiv,OW
+NHS-C074,NHS-R20,Kogi,cogu1240,Sb2,.,SC07,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,chib1249,Cogui,NW
+NHS-C075,NHS-R08,Korea,kore1280,Ed1,.,AA01,116,.,,1,1,.,.,.,.,kore1284,Korean,OW
+NHS-C076,NHS-R18,Huichol,huic1243,Ni3,.,NU19,152,.,,1,1,.,.,.,.,utoa1244,Huichol,NW
+NHS-C077,NHS-R03,Aranda,aran1263,Id1,B122|B124,OI08,91,1048,,1,1,0,1,.,Combines several D-PLACE entries,pama1250,Aranda,NW
+NHS-C078,NHS-R04,Highland Scots,scot1245,.,.,ES10,.,.,,0,.,.,.,.,.,indo1319,Scottish Gaelic,OW
+NHS-C079,NHS-R09,Maasai,masa1300,Aj2,.,FL12,34,.,,1,1,.,.,.,.,nilo1247,Masai,OW
+NHS-C080,NHS-R19,Tlingit,tlin1245,Nb22,B292,NA12,.,.,J2,1,1,1,.,1,.,atha1245,Tlingit,NW
+NHS-C081,NHS-R25,Iban,iban1264,Ib1,.,OC06,85,.,,1,1,.,.,.,.,aust1307,Iban,OW
+NHS-C082,NHS-R06,Kuna,bord1248,Sa1,.,SB05,158,.,,1,1,.,.,.,.,chib1249,Border Kuna,NW
+NHS-C083,NHS-R24,Santal,sant1410,Ef1,.,AW42,62,.,,1,1,.,.,.,.,aust1305,Santali,OW
+NHS-C084,NHS-R30,Dogon,bank1259,Ag3,.,FA16,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,dogo1299,Bankan Tey Dogon,OW
+NHS-C085,NHS-R25,Central Thai,thai1261,Ej9,.,AO07,76,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,taik1256,Thai,OW
+NHS-C086,NHS-R18,Tarahumara,cent2131,Ni1,.,NU33,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,utoa1244,Central Tarahumara,NW
+NHS-C087,NHS-R08,Taiwan Hokkien,minn1241,.,.,AD05,.,.,,0,.,.,.,.,.,sino1245,Min Nan Chinese,OW
+NHS-C088,NHS-R17,Shluh,susi1238,Cd5,.,MW11,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,afro1255,Susiua,OW
+NHS-C089,NHS-R18,Yaqui,yaqu1251,Ni7,.,.,.,.,,1,1,.,.,.,.,utoa1244,Yaqui,NW
+NHS-C090,NHS-R23,Sweden,swed1254,.,.,.,.,.,,0,.,.,.,.,.,indo1319,Swedish,OW
+NHS-C091,NHS-R24,Khasi,khas1269,Ei8,.,AR07,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,aust1305,Khasi,OW
+NHS-C092,NHS-R05,Mbuti,kang1285,Aa5,B65,FO04,13,.,,1,1,1,.,.,.,atla1278,Kango (Tshopo District),OW
+NHS-C093,NHS-R13,Kanaks,loya1239|newc1243,.,.,.,.,.,,0,.,.,.,.,.,aust1307,,NW
+NHS-C094,NHS-R07,Q'ero Quichua,cusc1236,.,.,.,.,.,,0,.,.,.,.,There is a D-PLACE entry (and EA and HRAF entries) for the Cusco Quechuas (Incas); societies matches languages but refers to the Incan empire at the time of contact,quec1387,Cusco Quechua,NW
+NHS-C095,NHS-R02,Copper Inuit,copp1244,Na3,B381,ND08,124,.,,1,1,1,.,.,.,eski1264,Inuinnaqtun,NW
+NHS-C096,NHS-R14,Yapese,yape1248,If6,.,OR22,110,.,,1,1,.,.,.,.,aust1307,Yapese,NW
+NHS-C097,NHS-R28,Mataco,wich1263,Sh1,.,SI07,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,mata1289,Wichí Lhamtés Vejoz,NW
+NHS-C098,NHS-R07,Aymara,cent2142,Sf2,.,SF05,172,.,,1,1,.,.,.,.,ayma1253,Central Aymara,NW
+NHS-C099,NHS-R26,Greeks,mode1248,Ce7,.,EH01,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,indo1319,Modern Greek,OW
+NHS-C100,NHS-R16,Yakut,yaku1245,Ec2,.,RV02,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,turk1311,Sakha,OW
+NHS-C101,NHS-R25,Mentawaians,ment1249,Ib7,.,OD09,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,aust1307,Mentawai,OW
+NHS-C102,NHS-R24,Thakali,thak1245,.,.,.,.,.,,0,.,.,.,.,.,sino1245,,OW
+NHS-C103,NHS-R18,Seri,seri1257,Ni4,BI43,NU31,.,.,,1,1,1,.,.,.,,Seri,NW
+NHS-C104,NHS-R17,Tuareg,tuar1240,Cc5|Cc9|Cc10|Cc13,.,MS25,41,.,,1,0,.,.,.,Combines several D-PLACE entries,afro1255,Tuareg,OW
+NHS-C105,NHS-R03,Walbiri,warl1254,Id10,B109,.,.,192,,1,1,1,1,.,.,pama1250,Warlpiri,NW
+NHS-C106,NHS-R16,Nanai,nana1257,Ec9,.,.,.,.,,1,1,.,.,.,.,tung1282,Nanai,OW
+NHS-C107,NHS-R29,Navajo,nava1243,Nh3,.,NT13,.,.,J157|J158,1,1,.,.,0,.,atha1245,Navajo,NW
+NHS-C108,NHS-R30,Akan,asan1239,Af3,.,FE12,.,.,,1,1,.,.,.,.,atla1278,Asante,OW
+NHS-C109,NHS-R03,Yolngu,yuul1239,Id2,B88,OI17,.,1093,,0,1,1,1,.,Binford Atlas and CHIRILA entries refer to a sub-group of the Yolngu,pama1250,Yuulngu,NW
+NHS-C110,NHS-R05,Aka,bamb1264,.,B60,.,.,.,,1,.,1,.,.,.,atla1278,Bambenzele,OW
+NHS-C111,NHS-R10,Bororo,boro1282,Si1,B41,SP08,.,.,,1,1,1,.,.,.,boro1281,Bororo,NW
+NHS-C112,NHS-R19,Kwakwaka'wakw,kwak1269,Nb3,B288,.,.,.,J10,1,1,1,.,1,EA name (Kwakiutl) has become controversial,waka1280,Kwak'wala,NW
+NHS-C113,NHS-R25,Phunoi,phun1245,.,.,.,.,.,,0,.,.,.,.,.,sino1245,Phunoi,OW
+NHS-C114,NHS-R09,Amhara,amha1245,Ca7,.,MP05,37,.,,1,1,.,.,.,.,afro1255,Amharic,OW
+NHS-C115,NHS-R01,Tukano,tuca1252,Se12,.,SQ19,.,.,,1,1,.,.,.,D-PLACE entry does not include HRAF code,tuca1253,Tucano,NW
+NHS-C116,NHS-R01,Yanoama,yano1261,Sd9,.,SQ18,163,.,,1,1,.,.,.,.,yano1268,Yanomamö,NW
+NHS-C117,NHS-R15,Turkmen,turk1304,Eb5,.,.,.,.,,1,1,.,.,.,.,turk1311,Turkmen,OW
