@@ -84,6 +84,9 @@ names(psf.fnames) <- gsub('\\.xml', '', basename(psf.fnames))
 all(!is.na(psf.fnames))
 
 ## process and save psf data if it doesn't already exist, otherwise load it
+## note that these rds files are not in the public repo
+## to run script2 you need to get the raw data from HRAF under a Data Use Agreement
+## contact us to discuss if you need help!
 if (!file.exists(file.path(results.dir, 'psf_ocms_by_para.rds')) |
       !file.exists(file.path(results.dir, 'psf_words_by_para.rds'))
     ){
