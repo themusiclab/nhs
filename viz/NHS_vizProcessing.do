@@ -432,6 +432,7 @@ export delimited using vizData/figS6.csv, replace
 
 ** get country-level summaries
 insheet using ../results/weather_bpca_country_summary_final.csv, names clear
+drop distr* other*
 destring dim, ignore("q.") replace
 destring sdest sdcilo sdcihi, force replace
 reshape wide meanest-sdcihi, i(country) j(dim)
@@ -502,6 +503,7 @@ insheet using ../results/weather_bpca_country_summary_final.csv, names clear
 
 ** cleanup
 destring dim, ignore("q.") replace
+drop distr* other*
 destring sdest sdcilo sdcihi, force replace
 drop if sdest==.
 reshape wide meanest-sdcihi, i(country) j(dim)
