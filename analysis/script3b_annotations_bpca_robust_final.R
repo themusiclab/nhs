@@ -618,7 +618,7 @@ Q <- sum(Sigma.naive.eigen$values > sv.thresh)
 ndraws <- 1000
 
 ## cambridge zip codes
-seeds <- c(02138, 02139, 02142)
+seeds <- 02138
 
 robustness <- TRUE
 
@@ -640,20 +640,18 @@ famd.fnames <- file.path(
           )
 )
 
-for (chain in 1:length(seeds)){
-  if (!file.exists(famd.fnames[chain])){
-    set.seed(seeds[chain])
-    mod.bpca <- bpca(X,
-                     Q = Q,
-                     maxiter.em = 100,
-                     niter.mcmc = ndraws,
-                     scaling = ifelse(feature.is.nonbinary,
-                                      'pca',
-                                      'mca'
-                                      )
-                     )
-    saveRDS(mod.bpca, famd.fnames[chain])
-  }
+if (!file.exists(famd.fnames[chain])){
+  set.seed(seeds[chain])
+  mod.bpca <- bpca(X,
+                   Q = Q,
+                   maxiter.em = 100,
+                   niter.mcmc = ndraws,
+                   scaling = ifelse(feature.is.nonbinary,
+                                    'pca',
+                                    'mca'
+                                    )
+                   )
+  saveRDS(mod.bpca, famd.fnames[chain])
 }
 
 
@@ -662,29 +660,14 @@ for (chain in 1:length(seeds)){
 ## merge chains after dropping burn-in ##
 #########################################
 
-mods.bpca <- lapply(famd.fnames, readRDS)
+mod.bpca <- readRDS(famd.fnames)
 
 burn <- 1:200
-mod.bpca <- list(mle = mods.bpca[[1]]$mle)  # mle is same for all chains
 mod.bpca$mcmc <- list(
-    mu = cbind(mods.bpca[[1]]$mcmc$mu[, -burn],
-               mods.bpca[[2]]$mcmc$mu[, -burn],
-               mods.bpca[[3]]$mcmc$mu[, -burn]
-               ),
-    W.rotate = abind(mods.bpca[[1]]$mcmc$W.rotate[,, -burn],
-                     mods.bpca[[2]]$mcmc$W.rotate[,, -burn],
-                     mods.bpca[[3]]$mcmc$W.rotate[,, -burn],
-                     along = 3
-                     ),
-    scores.rotate = abind(mods.bpca[[1]]$mcmc$scores.rotate[,, -burn],
-                          mods.bpca[[2]]$mcmc$scores.rotate[,, -burn],
-                          mods.bpca[[3]]$mcmc$scores.rotate[,, -burn],
-                          along = 3
-                          ),
-    sigmasq = c(mods.bpca[[1]]$mcmc$sigmasq[-burn],
-                mods.bpca[[2]]$mcmc$sigmasq[-burn],
-                mods.bpca[[3]]$mcmc$sigmasq[-burn]
-                )
+    mu = mod.bpca$mcmc$mu[, -burn],
+    W.rotate = mod.bpca$mcmc$W.rotate[,, -burn],
+    scores.rotate = mod.bpca$mcmc$scores.rotate[,, -burn],
+    sigmasq = mod.bpca$mcmc$sigmasq[-burn]
 )
 
 D <- ncol(X)
@@ -946,82 +929,6 @@ write.csv(
   file.path(results.dir, 'ethno_bpca_doc_summary_final_robust.csv'),
   row.names = FALSE
 )
-
-
-
-ggplot(docmean.summary) +
-  geom_point(aes(x = ncites.for.culture,
-                 y = docmean.est,
-                 ymin = docmean.cilo,
-                 ymax = docmean.cihi,
-                 group = cite,
-                 ),
-             size = .5,
-             position = position_dodge(width = .5)
-             ) +
-  geom_errorbar(aes(x = ncites.for.culture,
-                    y = docmean.est,
-                    ymin = docmean.cilo,
-                    ymax = docmean.cihi,
-                    group = cite,
-                    ),
-                width = 0,
-                position = position_dodge(width = .5),
-                alpha = .1
-                ) +
-  geom_point(aes(x = ncites,
-                 y = mean.est,
-                 ymin = mean.cilo,
-                 ymax = mean.cihi,
-                 group = culture
-                 ),
-             data = culture.summary,
-             size = .5,
-             position = position_dodge(width = .5),
-             color = 'red'
-             ) +
-  geom_errorbar(aes(x = ncites,
-                    y = mean.est,
-                    ymin = mean.cilo,
-                    ymax = mean.cihi,
-                    group = culture
-                    ),
-                data = culture.summary,
-                width = 0,
-                position = position_dodge(width = .5),
-                color = 'red'
-                ) +
-  facet_grid(dim ~ .) +
-  ggtitle('document mean divergence from global mean by #docs') +
-  xlab('number of unique documents') +
-  ylab('posterior mean and 95% CI on document mean')
-
-
-pdf(file.path(results.dir, 'culturemean_by_npassages.pdf'), 8, 6)
-ggplot(culture.summary,
-       aes(x = npassages,
-           y = mean.est,
-           ymin = mean.cilo,
-           ymax = mean.cihi,
-           group = culture,
-           color = ncites.cut
-           )
-       ) +
-  geom_point(size = .5,
-             position = position_dodge(width = .5)
-             ) +
-  geom_errorbar(width = 0,
-                position = position_dodge(width = .5)
-                ) +
-  facet_grid(dim ~ .) +
-  guides(color = guide_legend(title = '#docs')) +
-  scale_x_log10() +
-  ggtitle('culture mean divergence from global mean by #docs and #passages') +
-  xlab('number of unique passages') +
-  ylab('posterior mean and 95% CI on culture mean')
-dev.off()
-
-
 
 
 

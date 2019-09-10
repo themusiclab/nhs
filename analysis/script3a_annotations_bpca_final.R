@@ -1008,7 +1008,7 @@ author.summary <- dcast(author.summary, q + coef ~ stat)
 
 ## output author results
 write.csv(author.summary,
-          file.path(results.dir, 'ethno_bpca_author_summary.csv'),
+          file.path(results.dir, 'ethno_bpca_author_summary_final.csv'),
           row.names = FALSE
           )
 ggplot(author.summary,
