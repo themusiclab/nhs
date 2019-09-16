@@ -17,10 +17,8 @@ registerDoMC(cores = 7)
 library(reshape2)
 library(xtable)
 library(plyr)
-library(quanteda)
 
 ## graphics
-library(car)       # for scatterplotMatrix() visualization
 library(ggplot2)
 
 ## dirs
