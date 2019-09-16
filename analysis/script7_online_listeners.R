@@ -106,6 +106,9 @@ annotate.dat$third.mode <-
 annotate.dat$multimodal.song <-
     tapply(annotate.dat$tonal_pitch1.numeric, annotate.dat$song, multimodalSong)[annotate.dat$song]
 
+write.csv(unique(annotate.dat[,c("song", "multimodal.song")]),
+          "modality_labels.csv")
+
 unimodal.tonal.codes <- subset(annotate.dat,
                                annotate.dat$multimodal.song == 0)
 
