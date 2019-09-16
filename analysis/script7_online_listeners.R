@@ -15,6 +15,7 @@ multimodalSong <- function(ratings) {
 }
 
 data.dir <- file.path('..', 'data', 'nhs')
+results.dir <- file.path('..', 'results')
 
 ## Load expert annotations data
 annotate.dat <-
@@ -107,7 +108,7 @@ annotate.dat$multimodal.song <-
     tapply(annotate.dat$tonal_pitch1.numeric, annotate.dat$song, multimodalSong)[annotate.dat$song]
 
 write.csv(unique(annotate.dat[,c("song", "multimodal.song")]),
-          "modality_labels.csv")
+          file.path(results.dir, "modality_labels.csv"))
 
 unimodal.tonal.codes <- subset(annotate.dat,
                                annotate.dat$multimodal.song == 0)
