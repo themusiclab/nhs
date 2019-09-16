@@ -1380,12 +1380,12 @@ for(fold.var in fold.vars.g1){
                                  out
                              })
                       ),
-              file.path(results.dir, paste0(fold.var, "_", 'disco_overall_confusion_20190702.csv')),
+              file.path(results.dir, paste0(fold.var, "_", 'disco_overall_confusion.csv')),
               row.names = FALSE
               )
 
     write.csv(acc.results,
-              file.path(results.dir, paste0(fold.var, "_", 'disco_overall_acc_20190702.csv')),
+              file.path(results.dir, paste0(fold.var, "_", 'disco_overall_acc.csv')),
               row.names = FALSE
               )
 }
@@ -1875,11 +1875,11 @@ write.csv(do.call(rbind,
                              out
                          })
                   ),
-          file.path(results.dir, paste0(fold.var, "_", 'disco_overall_confusion_20190702.csv')),
+          file.path(results.dir, paste0(fold.var, "_", 'disco_overall_confusion.csv')),
           row.names = FALSE
           )
 
 write.csv(acc.results,
-          file.path(results.dir, paste0(fold.var, "_", 'disco_overall_acc_20190702.csv')),
+          file.path(results.dir, paste0(fold.var, "_", 'disco_overall_acc.csv')),
           row.names = FALSE
           )
