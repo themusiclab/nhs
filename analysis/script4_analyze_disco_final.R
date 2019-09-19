@@ -20,6 +20,7 @@ library(plyr)
 
 ## graphics
 library(ggplot2)
+library(car)
 
 ## dirs
 data.dir <- file.path('..', 'data', 'nhs')
@@ -35,6 +36,7 @@ pval.1side.to.2side <- function(p){
 }
 
 options(stringsAsFactors = FALSE)
+
 
 
 
@@ -64,346 +66,9 @@ disco.mir.panteli <- # separate df for the analysis with the panteli features
 disco.culture.meta <-
   read.csv(file.path(data.dir, 'NHSCultures_Metadata.csv'))
 
-
-## ###############################################
-## ## read transcription ngrams for description ##
-## ###############################################
-
-## ## read in pitch-grams
-## disco.pitch.paths <- list.files(
-##   file.path(data.dir, 'Discography Transcriptions', 'ngrams'),
-##   pattern = 'pitch',
-##   full.names = TRUE
-## )
-## disco.pitch <- sapply(disco.pitch.paths, function(x){
-##   ## each line is a separate voice, insert extra separator so ngrams don't
-##   ## span multiple voices
-##   paste(readLines(x), collapse = ' . ')
-## })
-## names(disco.pitch) <- basename(names(disco.pitch))
-## names(disco.pitch) <- gsub('-pitches\\.txt', '', names(disco.pitch))
-
-## ## read in rhythm-grams
-## disco.rhythm.paths <- list.files(
-##   file.path(data.dir, 'Discography Transcriptions', 'ngrams'),
-##   pattern = 'rhythm',
-##   full.names = TRUE
-## )
-## disco.rhythm <- sapply(disco.rhythm.paths, function(x){
-##   ## each line is a separate voice, insert extra separator so ngrams don't
-##   ## span multiple voices
-##   paste(readLines(x), collapse = ' . ')
-## })
-## names(disco.rhythm) <- basename(names(disco.rhythm))
-## names(disco.rhythm) <- gsub('-rhythms\\.txt', '', names(disco.rhythm))
-
-
-
-## ## construct dtm with raw pitch-grams
-## disco.pitch.dtm <- dfm(disco.pitch,
-##                        what = 'word',
-##                        ngrams = 2:3
-##                        )
-## ## drop pitch-grams that span a rest
-## disco.pitch.dtm <- disco.pitch.dtm[,!grepl('\\.', colnames(disco.pitch.dtm))]
-## ## identify 2/3-grams by counting number of token separators
-## pitch.ngrams.length <- nchar(gsub('[0-9]', '', colnames(disco.pitch.dtm))) + 1
-## ## reorder columns
-## disco.pitch.dtm <- disco.pitch.dtm[,order(pitch.ngrams.length,
-##                                           colnames(disco.pitch.dtm))
-##                                    ]
-## pitch.ngrams.length <- nchar(gsub('[0-9]', '', colnames(disco.pitch.dtm))) + 1
-
-
-
-## ## construct dtm with raw rhythm-grams
-## disco.rhythm.dtm <- dfm(disco.rhythm,
-##                        what = 'fastestword',
-##                        ngrams = 2:3
-##                        )
-## ## drop rhythm-grams that span a rest
-## disco.rhythm.dtm <- disco.rhythm.dtm[,!grepl('\\.', colnames(disco.rhythm.dtm))]
-## ## identify 2/3-grams by counting number of token separators
-## rhythm.ngrams.length <-
-##   nchar(gsub('[0-9/]', '', colnames(disco.rhythm.dtm))) + 1
-## ## reorder columns
-## disco.rhythm.dtm <- disco.rhythm.dtm[,order(rhythm.ngrams.length,
-##                                           colnames(disco.rhythm.dtm))
-##                                    ]
-## rhythm.ngrams.length <-
-##   nchar(gsub('[0-9/]', '', colnames(disco.rhythm.dtm))) + 1
-
-
-
-## ## identify pitchgrams that are additive shifts of each other
-## pitch.to.pitchrel <- sapply(
-##   colnames(disco.pitch.dtm, '_'),
-##   function(token){
-##     pitch.difference <- diff(as.numeric(strsplit(token, '_')[[1]]))
-##     paste(
-##       sprintf('%+d', pitch.difference),
-##       collapse = '_'
-##     )
-##   })
-## ## construct a thesaurus for quanteda
-## pitchrel.dict <- dictionary(
-##   sapply(
-##     sort(unique(pitch.to.pitchrel)),
-##     function(pitchrel){
-##       names(pitch.to.pitchrel[pitch.to.pitchrel == pitchrel])
-##     },
-##     simplify = FALSE
-##   )
-## )
-## ## rebuild dtm with collapsed pitch-grams
-## disco.pitchrel.dtm <- dfm(disco.pitch,
-##                            what = 'word',
-##                            ngrams = 2:3,
-##                            dictionary = pitchrel.dict
-##                            )
-## rownames(disco.pitchrel.dtm) <-
-##   gsub('-pitches\\.txt', '', rownames(disco.pitchrel.dtm))
-## pitchrel.ngrams.length <-
-##   nchar(gsub('[0-9+\\-]', '', colnames(disco.pitchrel.dtm))) + 2
-
-
-
-## ## identify rhythmgrams where intervals are multiplicative shifts of each other
-## rhythm.to.rhythmrel <- sapply(
-##   colnames(disco.rhythm.dtm, '_'),
-##   function(token){
-##     rhythm.intervals <- strsplit(token, '_')[[1]]
-##     rhythm.scaled <- sapply(rhythm.intervals,
-##                            function(x){eval(parse(text = x))
-##                            })
-##     rhythm.scaled <- rhythm.scaled[-1] / rhythm.scaled[1]
-##     paste(
-##       sprintf('x%0.2f', rhythm.scaled),
-##       collapse = '_'
-##     )
-##   })
-## ## construct a thesaurus for quanteda
-## rhythmrel.dict <- dictionary(
-##   sapply(
-##     sort(unique(rhythm.to.rhythmrel)),
-##     function(rhythmrel){
-##       names(rhythm.to.rhythmrel[rhythm.to.rhythmrel == rhythmrel])
-##     },
-##     simplify = FALSE
-##   )
-## )
-## ## rebuild dtm with collapse rhythm-grams
-## disco.rhythmrel.dtm <- dfm(disco.rhythm,
-##                            what = 'fastestword',
-##                            ngrams = 2:3,
-##                            dictionary = rhythmrel.dict
-##                            )
-## rownames(disco.rhythmrel.dtm) <-
-##   gsub('-rhythmes\\.txt', '', rownames(disco.rhythmrel.dtm))
-## rhythmrel.ngrams.length <-
-##   nchar(gsub('[0-9x.]', '', colnames(disco.rhythmrel.dtm))) + 2
-
-
-## ## normalize datasets by calculating ngram proportion
-## ##   (normalize separately for 2-grams and 3-grams)
-
-## disco.pitch.prop.dtm <- disco.pitch.dtm
-## for (i in 1:nrow(disco.pitch.prop.dtm)){
-##   disco.pitch.prop.dtm[i, pitch.ngrams.length == 2] <-
-##     disco.pitch.prop.dtm[i, pitch.ngrams.length == 2] /
-##     sum(disco.pitch.prop.dtm[i, pitch.ngrams.length == 2])
-##   disco.pitch.prop.dtm[i, pitch.ngrams.length == 3] <-
-##     disco.pitch.prop.dtm[i, pitch.ngrams.length == 3] /
-##     sum(disco.pitch.prop.dtm[i, pitch.ngrams.length == 3])
-## }
-
-## disco.pitchrel.prop.dtm <- disco.pitchrel.dtm
-## for (i in 1:nrow(disco.pitchrel.prop.dtm)){
-##   disco.pitchrel.prop.dtm[i, pitchrel.ngrams.length == 2] <-
-##     disco.pitchrel.prop.dtm[i, pitchrel.ngrams.length == 2] /
-##     sum(disco.pitchrel.prop.dtm[i, pitchrel.ngrams.length == 2])
-##   disco.pitchrel.prop.dtm[i, pitchrel.ngrams.length == 3] <-
-##     disco.pitchrel.prop.dtm[i, pitchrel.ngrams.length == 3] /
-##     sum(disco.pitchrel.prop.dtm[i, pitchrel.ngrams.length == 3])
-## }
-
-## disco.rhythm.prop.dtm <- disco.rhythm.dtm
-## for (i in 1:nrow(disco.rhythm.prop.dtm)){
-##   disco.rhythm.prop.dtm[i, rhythm.ngrams.length == 2] <-
-##     disco.rhythm.prop.dtm[i, rhythm.ngrams.length == 2] /
-##     sum(disco.rhythm.prop.dtm[i, rhythm.ngrams.length == 2])
-##   disco.rhythm.prop.dtm[i, rhythm.ngrams.length == 3] <-
-##     disco.rhythm.prop.dtm[i, rhythm.ngrams.length == 3] /
-##     sum(disco.rhythm.prop.dtm[i, rhythm.ngrams.length == 3])
-## }
-
-## disco.rhythmrel.prop.dtm <- disco.rhythmrel.dtm
-## for (i in 1:nrow(disco.rhythmrel.prop.dtm)){
-##   disco.rhythmrel.prop.dtm[i, rhythmrel.ngrams.length == 2] <-
-##     disco.rhythmrel.prop.dtm[i, rhythmrel.ngrams.length == 2] /
-##     sum(disco.rhythmrel.prop.dtm[i, rhythmrel.ngrams.length == 2])
-##   disco.rhythmrel.prop.dtm[i, rhythmrel.ngrams.length == 3] <-
-##     disco.rhythmrel.prop.dtm[i, rhythmrel.ngrams.length == 3] /
-##     sum(disco.rhythmrel.prop.dtm[i, rhythmrel.ngrams.length == 3])
-## }
-
-
-
-## ## null model is random draw from corresponding pitch collection
-## scales <- list(
-##   'Aeolian' = c(0, 2, 3, 5, 7, 8, 10),
-##   'Dorian' = c(0, 2, 3, 5, 7, 9, 10),
-##   'Generic major' = c(0, 2, 4, 5, 7),
-##   'Generic minor' = c(0, 2, 3, 5, 7),
-##   'Ionian' = c(0, 2, 4, 5, 7, 9, 11),
-##   'Locrian' = c(0, 1, 3, 5, 6, 8, 10),
-##   'Lydian' = c(0, 2, 4, 6, 7, 9, 11),
-##   'Major pentatonic' = c(0, 2, 4, 7, 9),
-##   'Minor pentatonic' = c(0, 3, 5, 7, 10),
-##   'Mixolydian' = c(0, 2, 4, 5, 7, 9, 10),
-##   'Phrygian' = c(0, 1, 3, 5, 7, 8, 10)
-## )
-
-## ddply(disco.expert.raw, 'song', function(x){
-##   scale <- x$scale_type1
-##   scale <- scale[!scale %in% c('.', 'Undefined')]
-##   names(sort(table(scale), decreasing = TRUE))[1]
-##   })
-
-## disco.ngram.summary <- rbind(
-##   data.frame(type = 'pitch',
-##              length = pitch.ngrams.length,
-##              name = colnames(disco.pitch.dtm),
-##              instances = colSums(disco.pitch.dtm),
-##              proportion = colSums(disco.pitch.prop.dtm) / nrow(disco.meta),
-##              songs = colSums(disco.pitch.dtm > 0)
-##              ),
-##   data.frame(type = 'relative pitch',
-##              length = pitchrel.ngrams.length,
-##              name = colnames(disco.pitchrel.dtm),
-##              instances = colSums(disco.pitchrel.dtm),
-##              proportion = colSums(disco.pitchrel.prop.dtm) / nrow(disco.meta),
-##              songs = colSums(disco.pitchrel.dtm > 0)
-##              ),
-##   data.frame(type = 'rhythm',
-##              length = rhythm.ngrams.length,
-##              name = colnames(disco.rhythm.dtm),
-##              instances = colSums(disco.rhythm.dtm),
-##              proportion = colSums(disco.rhythm.prop.dtm) / nrow(disco.meta),
-##              songs = colSums(disco.rhythm.dtm > 0)
-##              ),
-##   data.frame(type = 'relative rhythm',
-##              length = rhythmrel.ngrams.length,
-##              name = colnames(disco.rhythmrel.dtm),
-##              instances = colSums(disco.rhythmrel.dtm),
-##              proportion = colSums(disco.rhythmrel.prop.dtm) / nrow(disco.meta),
-##              songs = colSums(disco.rhythmrel.dtm > 0)
-##              )
-## )
-
-## disco.ngram.summary <-
-##   ddply(disco.ngram.summary, c('type', 'length'), function(x){
-##     ## if (x$type == 'rhythm' & x$length == 2){
-##     ##   browser()
-##     ## }
-##     x <- x[order(x$proportion, decreasing = TRUE),]
-##     x$proportion.cumulative <- cumsum(x$proportion)
-##     return(x)
-##   })
-## ## disco.ngram.summary$name <- factor(disco.ngram.summary$name,
-## ##                                    levels = )
-
-## disco.ngram.summary.top20 <-
-##   ddply(disco.ngram.summary, c('type', 'length'), head, 20)
-
-## type <- 'rhythm'
-## length <- 2
-
-## disco.ngram.summary$plot.order <- 1:nrow(disco.ngram.summary)
-
-## disco.ngram.quantile <- ddply(
-##   disco.ngram.summary,
-##   c('type', 'length'),
-##   function(d){
-##     c(q_0.75 = min(which(d$proportion.cumulative >= .75)),
-##       n.observed = nrow(d)
-##       )
-## })
-
-
-## for (type in unique(disco.ngram.summary$type)){
-##   pdf(file.path(results.dir, sprintf('cdf_%s.pdf', gsub(' ', '_', type))),
-##       12, 8
-##       )
-##   print(
-##   ggplot(
-##     disco.ngram.summary[
-##       disco.ngram.summary$type == type,
-##       ],
-##     aes(## x = name,
-##       x = plot.order,
-##         y = proportion.cumulative
-##         )
-##   ) +
-##     geom_col(width = 1) +
-##     ylim(0, 1) +
-##     facet_grid(. ~ length, labeller = label_both, scales = 'free', drop = TRUE) +
-##     theme(axis.text.x = element_blank()
-##           ## axis.text.x = element_text(angle = 90, hjust = 1)
-##           ) +
-##     ggtitle(type) +
-##     xlab(type %.% 'gram, ordered by frequency')
-##   )
-##   dev.off()
-## }
-
-## ggplot(
-##   disco.ngram.summary.top20[
-##     disco.ngram.summary.top20$type == type,
-##     ],
-##   aes(x = name,
-##       y = proportion.cumulative
-##       )
-## ) +
-##   geom_col(width = 1) +
-##   ylim(0, 1) +
-##   facet_grid(. ~ length, labeller = label_both, scales = 'free', drop = TRUE) +
-##   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-##   ggtitle(type)
-
-
-
 ###################################
 ## process expert-based features ##
 ###################################
-
-## tone.to.numeric <- c(
-##   'C' = 0,
-##   'C#' = 1,
-##   'D' = 2,
-##   'D#' = 3,
-##   'E' = 4,
-##   'F' = 5,
-##   'F#' = 6,
-##   'G' = 7,
-##   'G#' = 8,
-##   'A' = 9,
-##   'A#' = 10,
-##   'B' = 11
-## )
-
-## ## tonal center doesn't make sense for comparison b/c keys can be transposed
-## ## reduce dimension of tonal center (was 12 categories)
-## ##   while respecting the fact that B is close to C
-## disco.expert.raw$tonal_pitch_cos <- cos(
-##   2 * pi / 12 * tone.to.numeric[disco.expert.raw$tonal_pitch1]
-## )
-## disco.expert.raw$tonal_pitch_sin <- sin(
-##   2 * pi / 12 * tone.to.numeric[disco.expert.raw$tonal_pitch1]
-## )
-
-## disco.expert.raw$tonal_multiple <-
-##   !disco.expert.raw$tonal_pitch2 %in% c('Single point of stability', '.')
 
 disco.expert.raw$micrometer_duple <-
   disco.expert.raw$micrometer %in% c('Duple', 'Both duple and triple')
@@ -433,16 +98,6 @@ disco.expert.raw$macrometer_triple <-
          FALSE,
          as.numeric(disco.expert.raw$macrometer_other) %% 3 == 0
          )
-## disco.expert.raw$macrometer_odd <-
-##   disco.expert.raw$macrometer_5 |
-##   disco.expert.raw$macrometer_7 |
-##   disco.expert.raw$macrometer_11 |
-##   disco.expert.raw$macrometer_13 |
-##   ifelse(disco.expert.raw$macrometer_other == '.',
-##          FALSE,
-##          as.numeric(disco.expert.raw$macrometer_other) %% 2 != 0 &
-##          as.numeric(disco.expert.raw$macrometer_other) %% 3 != 0
-##          )
 
 ## break out variation by type
 disco.expert.raw$variation_melodic <-
@@ -454,38 +109,6 @@ disco.expert.raw$variation_rhythmic <-
                                       'Rhythmic and melodic variation'
                                       )
 
-## ## singer count and gender
-## disco.expert.raw$singers_n <- ifelse(
-##   disco.expert.raw$singers_n != '7 or more',
-##   as.numeric(disco.expert.raw$singers_n),
-##   7
-## )
-## disco.expert.raw$singers_female <-
-##   disco.expert.raw$singers_sex %in% c('Female', 'Both sexes')
-## disco.expert.raw$singers_male <-
-##   disco.expert.raw$singers_sex %in% c('Male', 'Both sexes')
-
-## ## unison, polyphony, and call_response are '.' for solo singers;
-## ##   we pool solo singers with group singers for which the feature is absent
-## disco.expert.raw$group <- disco.expert.raw$leader != '.'
-## disco.expert.raw$unison <- as.numeric(disco.expert.raw$unison == 1)
-## disco.expert.raw$polyphony <- as.numeric(disco.expert.raw$polyphony == 1)
-## disco.expert.raw$call_response <- as.numeric(disco.expert.raw$call_response == 1)
-
-## ## pool humming and pitched syllables
-## disco.expert.raw$words <- as.numeric(disco.expert.raw$words == 'Words present')
-
-## ending dynamics/speed are unobserved for songs that e.g. end abruptly;
-##   drop these features
-## disco.expert.raw$ending_speed <-
-##   disco.expert.raw$ending_accel - disco.expert.raw$ending_ritard
-## disco.expert.raw$ending_volume <-
-##   disco.expert.raw$ending_loud - disco.expert.raw$ending_quiet
-## disco.expert.raw$ending_abrupt <-
-##   disco.expert.raw$ending_finalnote - disco.expert.raw$ending_long
-## disco.expert.raw$ending_cut <-
-##     disco.expert.raw$ending_stop | disco.expert.raw$ending_unknown
-
 disco.expert.raw$tension <-
     disco.expert.raw$tension_melody +
     disco.expert.raw$tension_harmony +
@@ -494,36 +117,12 @@ disco.expert.raw$tension <-
     disco.expert.raw$tension_accent +
     disco.expert.raw$tension_dynamic
 
-## disco.expert.raw$clapstomp <-
-##     disco.expert.raw$clap | disco.expert.raw$stomp
-## disco.expert.raw$instru_any <- disco.expert.raw$instru != 'No instruments'
-## disco.expert.raw$instru_count <- c(
-##   'No instruments' = 0,
-##   '1' = 1,
-##   '2' = 2,
-##   '3' = 3,
-##   '4' = 4,
-##   '5 or more' = 5
-## )[disco.expert.raw$instru]
-
 disco.expert.raw$dynamics <- c(
     'Gets louder' = 1,
     'Multiple dynamics' = 1,
     'No dynamics' = 0,
     'Quiets down' = 1
 )[disco.expert.raw$dynamics]
-## disco.expert.raw$dynamics_louder <- c(
-##     'Gets louder' = 1,
-##     'Multiple dynamics' = 0,
-##     'No dynamics' = 0,
-##     'Quiets down' = -1
-## )[disco.expert.raw$dynamics]
-## disco.expert.raw$dynamics_count <- c(
-##     'No dynamics' = 0,
-##     'Gets louder' = 1,
-##     'Quiets down' = 1,
-##     'Multiple dynamics' = 2
-## )[disco.expert.raw$dynamics]
 
 disco.expert.raw$ritard_accel <- c(
     'No ritard or accel' = 0,
@@ -531,18 +130,6 @@ disco.expert.raw$ritard_accel <- c(
     'Speeds up' = 1,
     'Speeds up and slows down' = 1
 )[disco.expert.raw$ritard]
-## disco.expert.raw$ritard_accel <- c(
-##     'No ritard or accel' = 0,
-##     'Slows down' = -1,
-##     'Speeds up' = 1,
-##     'Speeds up and slows down' = 0
-## )[disco.expert.raw$ritard]
-## disco.expert.raw$ritard_count <- c(
-##     'No ritard or accel' = 0,
-##     'Slows down' = 1,
-##     'Speeds up' = 1,
-##     'Speeds up and slows down' = 2
-## )[disco.expert.raw$ritard]
 
 ## major/minor scale, single scale
 disco.expert.raw$scale_quality_minor <- c(
@@ -550,79 +137,6 @@ disco.expert.raw$scale_quality_minor <- c(
   'Major' = 0,
   'Minor' = 1
 )[disco.expert.raw$scale_quality]
-## disco.expert.raw$scale_multiple <-
-##   !disco.expert.raw$scale_type2 %in% c('Single pitch collection', '.')
-
-## ## numeric
-## features.expert.numeric <- c(
-##   'tempo_adj',
-##   'macrometer_ord',
-##   'singers_n',
-##   'syncopate',
-##   'accent',
-##   ## 'ending_speed',
-##   ## 'ending_volume'
-##   ## 'ending_abrupt',
-##   ## 'ending_follow',
-##   ## 'instru_count',
-##   'dynamics_louder',
-##   'dynamics_count',
-##   'ritard_accel',
-##   'ritard_count'
-## )
-
-## ## dummies
-## features.expert.binaryorprop <- c(
-##   ## 'tonal',
-##   ## 'tonal_multiple',
-##   ## 'scale',
-##   'micrometer_duple',
-##   'micrometer_triple',
-##   'macrometer_duple',
-##   'macrometer_triple',
-##   'macrometer_odd',
-##   ## 'repeat_small',
-##   ## 'repeat_large',
-##   'variation_rhythmic',
-##   'variation_melodic',
-##   'singers_female',
-##   'singers_male',
-##   ## 'group',
-##   ## 'leader_female',
-##   ## 'leader_male',
-##   ## 'unison',
-##   ## 'polyphony',
-##   ## 'call_response',
-##   'ornament',
-##   'vibrato',
-##   'words',
-##   'tension_melody',
-##   'tension_harmony',
-##   'tension_rhythm',
-##   'tension_motif',
-##   'tension_accent',
-##   'tension_dynamic',
-##   'tension_voices',
-##   'tension_inst',
-##   'clapstomp',
-##   'instru_any',
-##   ## DK: SM says instrument variables are cheating
-##   ## 'instru_idio',
-##   ## 'instru_membrano',
-##   ## 'instru_aero',
-##   ## 'instru_chordo',
-##   ## 'instru_rhythm1',
-##   ## 'instru_rhythm2',
-##   ## 'instru_pitched',
-##   ## 'instru_drone',
-##   ## 'instru_harmony',
-##   ## 'instru_bassline',
-##   ## 'instru_cpt',
-##   ## 'instru_melody',
-##   'scale_quality_minor',
-##   'scale_multiple'
-## )
-## features.expert <- c(features.expert.numeric, features.expert.binaryorprop)
 
 features.expert <- c(
   'tempo_adj',
@@ -668,13 +182,6 @@ annotations.alpha <- sapply(
 })
 as.matrix(sort(annotations.alpha))
 mean(annotations.alpha)
-
-## ## rescale features based on non-binary/proportion annotations
-## ##   by two s.d. to be on roughly the same scale
-## for (feature in features.expert.numeric){
-##   disco.expert[,feature] <-
-##     disco.expert[,feature] / 2 / sd(disco.expert[,feature])
-## }
 
 ## append song region
 disco.expert$nhs_region <- disco.meta$nhs_region[
@@ -726,34 +233,10 @@ disco.expert$nhs_subsistence <- disco.meta$nhs_subsistence[
         )
 ]
 
+
 ########################################
 ## parse transcription-based features ##
 ########################################
-
-## features.transcription <- c(
-##   'mean_interval',
-##   'distance_btwn_modal_intervals',
-##   'number_of_common_pitches',
-##   'common_intervals_count',
-##   'stepwise_motion',
-##   'melodic_thirds',
-##   'duration_of_melodic_arcs',
-##   'size_of_melodic_arcs',
-##   'rel_strength_top_pitchcls',
-##   'interval_btwn_strongest_pitchcls',
-##   'pitch_class_variety',
-##   'range',
-##   'note_density',
-##   'average_note_duration',
-##   'variability_of_note_duration',
-##   'modal_interval_prevalence',
-##   'rel_strength_modal_intervals',
-##   'amount_of_arpeggiation',
-##   'direction_of_motion',
-##   'modal_pitchcls_prev',
-##   'initial_tempo',
-##   'quality'
-## )
 
 features.transcription <- c(
   'mean_interval',
@@ -780,13 +263,6 @@ features.transcription <- c(
 
 ## subset columns to song id and features of interest
 disco.transcription <- disco.transcription[, c('song', features.transcription)]
-
-## ## rescale features based on non-binary/proportion annotations
-## ##   by two s.d. to be on roughly the same scale
-## for (feature in features.transcription.numeric){
-##   disco.transcription[,feature] <-
-##     disco.transcription[,feature] / 2 / sd(disco.transcription[,feature])
-## }
 
 ## append song region
 disco.transcription$nhs_region <- disco.meta$nhs_region[
@@ -837,8 +313,6 @@ disco.transcription$nhs_subsistence <- disco.meta$nhs_subsistence[
         disco.meta$song
         )
 ]
-
-
 
 
 ###########################################
@@ -1021,13 +495,6 @@ disco.naive.pred <- functions.naive[
 ## subset columns to song id and features of interest
 disco.naive <- disco.naive[, c('song', features.naive)]
 
-## ## rescale features based on non-binary/proportion annotations
-## ##   by two s.d. to be on roughly the same scale
-## for (feature in features.naive.numeric){
-##   disco.naive[,feature] <-
-##     disco.naive[,feature] / 2 * sd(disco.naive[,feature])
-## }
-
 ## append song region
 disco.naive$nhs_region <- disco.meta$nhs_region[
   match(sprintf('NHSDiscography-%03d', disco.naive$song),
@@ -1081,6 +548,7 @@ disco.naive$nhs_subsistence <- disco.meta$nhs_subsistence[
 
 
 
+
 ##############################
 ## song type classification ##
 ##############################
@@ -1103,26 +571,6 @@ fold.vars <- data.frame("old_world_new_world" = ow.nw,
                         "hraf_region" = hraf.region,
                         "hraf_subregion" = hraf.subregion,
                         "nhs_subsistence" = nhs.subsistence)
-
-## ## label each feature with origin
-## disco.naive.mat <- as.matrix(disco.naive[,features.naive])
-## colnames(disco.naive.mat) <- 'NAIVE.' %.% colnames(disco.naive.mat)
-## disco.expert.mat <- as.matrix(disco.expert[,features.expert])
-## colnames(disco.expert.mat) <- 'EXPERT.' %.% colnames(disco.expert.mat)
-## disco.transcription.mat <- as.matrix(disco.transcription[,features.transcription])
-## colnames(disco.transcription.mat) <- 'TRANSCRIPTION.' %.% colnames(disco.transcription.mat)
-## disco.all.mat <- cbind(
-##   disco.naive.mat[,'NAIVE.' %.% features.naive],
-##   disco.expert.mat[,'EXPERT.' %.% features.expert],
-##   disco.transcription.mat[,'TRANSCRIPTION.' %.% features.transcription]
-## )
-## features.nocontext <-
-##   readLines(file.path(data.dir, 'discography_features_nocontextual.txt'))
-## disco.all.mat <-
-##   disco.all.mat[, colnames(disco.all.mat)[
-##     gsub('^[A-Z]+\\.', '', colnames(disco.all.mat)) %in% features.nocontext
-##   ]
-##   ]
 
 ## label each feature with origin
 disco.naive.mat <- scale(
@@ -1153,13 +601,6 @@ disco.nocontext.mat <- cbind(
   disco.transcription.mat[,'TRANSCRIPTION.' %.% features.transcription]
 )
 
-## disco.all.mat <- cbind(
-##   disco.naive.mat[,'NAIVE.' %.% features.naive],
-##   disco.expert.mat[,'EXPERT.' %.% features.expert],
-##   disco.transcription.mat[,'TRANSCRIPTION.' %.% features.transcription],
-##   disco.mir.mat[,'MIR.' %.% features.mir]
-## )
-
 ##################################################
 ## categorical classification, split by dataset ##
 ##################################################
@@ -1174,7 +615,7 @@ for(fold.var in fold.vars.g1){
     acc.human <- .427
 
     ## classify using naive ratings of song form (omitting predictions of function)
-    set.seed(02138)
+    set.seed(02139)
     mod.naive <- cv.glmnet(
         x = disco.naive.mat,
         y = factor(song.function),
@@ -1200,7 +641,7 @@ for(fold.var in fold.vars.g1){
     acc.naive <- sum(diag(confusion.naive)) / sum(confusion.naive)
 
     ## classify using mir features
-    set.seed(02138)
+    set.seed(02139)
     mod.mir <- cv.glmnet(
         x = disco.mir.mat,
         y = factor(song.function),
@@ -1226,7 +667,7 @@ for(fold.var in fold.vars.g1){
     acc.mir <- sum(diag(confusion.mir)) / sum(confusion.mir)
 
     ## classify using mir AND panteli features
-    set.seed(02138)
+    set.seed(02139)
     mod.mir.panteli <- cv.glmnet(
         x = disco.mir.panteli.mat,
         y = factor(song.function),
@@ -1253,7 +694,7 @@ for(fold.var in fold.vars.g1){
     acc.mir.panteli <- sum(diag(confusion.mir.panteli)) / sum(confusion.mir.panteli)
 
     ## classify using transcriptions
-    set.seed(02138)
+    set.seed(02139)
     mod.transcription <- cv.glmnet(
         x = disco.transcription.mat,
         y = factor(song.function),
@@ -1279,7 +720,7 @@ for(fold.var in fold.vars.g1){
     acc.transcription <- sum(diag(confusion.transcription)) / sum(confusion.transcription)
 
     ## classify using experts
-    set.seed(02138)
+    set.seed(02139)
     mod.expert <- cv.glmnet(
         x = disco.expert.mat,
         y = factor(song.function),
@@ -1306,7 +747,7 @@ for(fold.var in fold.vars.g1){
 
     ## all context-free variables, which are just concatenated
     ##   (1) transcription variables and (2) expert variables
-    set.seed(02138)
+    set.seed(02139)
     mod.nocontext <- cv.glmnet(
         x = disco.nocontext.mat,
         y = factor(song.function),
@@ -1395,7 +836,7 @@ fold.var <- "old_world_new_world"
 fold.id <- as.factor(ow.nw)
 
 ## classify using naive ratings of song form (omitting predictions of function)
-set.seed(02138)
+set.seed(02139)
 mod.naive <- cv.glmnet(
     x = disco.naive.mat,
     y = factor(song.function),
@@ -1461,13 +902,11 @@ for(lambda in lambda.seq){
                                  )
         acc.naive <- sum(diag(confusion.naive)) / sum(confusion.naive)
         
-        print("Updating error")
-        print(acc.naive)
     }    
 }
 
 ## classify using mir features
-set.seed(02138)
+set.seed(02139)
 mod.mir <- cv.glmnet(
     x = disco.mir.mat,
     y = factor(song.function),
@@ -1519,7 +958,6 @@ for(lambda in lambda.seq){
     }
     llk <- -total.error
     cat("\nllk\n")
-    print(llk)
     if(total.error < best.error){
         best.error <- total.error
 
@@ -1535,13 +973,11 @@ for(lambda in lambda.seq){
                                  )
         acc.mir <- sum(diag(confusion.mir)) / sum(confusion.mir)
         
-        print("Updating error")
-        print(acc.mir)
     }    
 }
 
 ## classify using mir AND panteli features
-set.seed(02138)
+set.seed(02139)
 mod.mir.panteli <- cv.glmnet(
     x = disco.mir.panteli.mat,
     y = factor(song.function),
@@ -1607,13 +1043,11 @@ for(lambda in lambda.seq){
                                  )
         acc.mir.panteli <- sum(diag(confusion.mir.panteli)) / sum(confusion.mir.panteli)
         
-        print("Updating error")
-        print(acc.mir.panteli)
     }    
 }
 
 ## classify using transcriptions
-set.seed(02138)
+set.seed(02139)
 mod.transcription <- cv.glmnet(
     x = disco.transcription.mat,
     y = factor(song.function),
@@ -1679,13 +1113,11 @@ for(lambda in lambda.seq){
                                  )
         acc.transcription <- sum(diag(confusion.transcription)) / sum(confusion.transcription)
         
-        print("Updating error")
-        print(acc.transcription)
     }    
 }
 
 ## classify using experts
-set.seed(02138)
+set.seed(02139)
 mod.expert <- cv.glmnet(
     x = disco.expert.mat,
     y = factor(song.function),
@@ -1751,14 +1183,12 @@ for(lambda in lambda.seq){
                                  )
         acc.expert <- sum(diag(confusion.expert)) / sum(confusion.expert)
         
-        print("Updating error")
-        print(acc.expert)
     }    
 }
 
 ## all context-free variables, which are just concatenated
 ##   (1) transcription variables and (2) expert variables
-set.seed(02138)
+set.seed(02139)
 mod.nocontext <- cv.glmnet(
     x = disco.nocontext.mat,
     y = factor(song.function),
@@ -1824,8 +1254,6 @@ for(lambda in lambda.seq){
                                  )
         acc.nocontext <- sum(diag(confusion.nocontext)) / sum(confusion.nocontext)
         
-        print("Updating error")
-        print(acc.nocontext)
     }    
 }
 
@@ -1881,5 +1309,393 @@ write.csv(do.call(rbind,
 
 write.csv(acc.results,
           file.path(results.dir, paste0(fold.var, "_", 'disco_overall_acc.csv')),
+          row.names = FALSE
+          )
+
+
+
+
+##############################################################
+## binary classification after subsetting to two song types ##
+##############################################################
+
+functions <- sort(levels(song.function))
+functionpairs <- rbind(c('Dance', 'Healing'),
+                        c('Dance', 'Love'),
+                        c('Dance', 'Lullaby'),
+                        c('Healing', 'Love'),
+                        c('Healing', 'Lullaby'),
+                        c('Love', 'Lullaby')
+                        )
+
+functionpairs.results <- list()
+
+for (i in 1:nrow(functionpairs)){
+
+  ## glmnet: "the last level in alphabetical order is the target class"
+  functionpair <- sort(functionpairs[i,])
+  functionpair.ind <- which(song.function %in% functionpair)
+
+  mod.nocontext <- cv.glmnet(
+    x = disco.nocontext.mat[functionpair.ind,],
+    y = factor(song.function[functionpair.ind]),
+    alpha = 1,
+    family = 'binomial',
+    foldid = as.integer(factor(song.region[functionpair.ind])),
+    grouped = FALSE,
+    standardize = TRUE,
+    keep = TRUE
+  )
+  lambda.ind.nocontext <- match(mod.nocontext$lambda.min, mod.nocontext$glmnet.fit$lambda)
+  coef.nocontext <- mod.nocontext$glmnet.fit$beta[,lambda.ind.nocontext]
+  predict.nocontext <- functionpair[round(mod.nocontext$fit.preval[,lambda.ind.nocontext]) + 1]
+
+  ## nadeau & bengio method 1 (corrected resampled t-test):
+  ##   corrective factor for estimated generalization error sd
+  nb1.factor <- sqrt(
+    1 / length(unique(song.region)) +
+      2 / (length(functionpair.ind) - 2)
+  )
+
+  correct <- song.function[functionpair.ind] == predict.nocontext
+  correct.region <- tapply(correct, song.region[functionpair.ind], mean, simplify = TRUE)
+
+  ## expected proportion correct from random guesses according to known props
+  n <- length(functionpair.ind)
+  p <-
+    (sum(song.function == functionpair[1]) / n)^2 +
+    (sum(song.function == functionpair[2]) / n)^2
+
+  functionpairs.results[[
+    sprintf('%s (-) vs %s (+)', functionpair[1], functionpair[2])
+    ]] <- list(
+      function1 = functionpair[1],
+      function2 = functionpair[2],
+      accuracy = mean(correct),
+      se = sd(correct.region) * nb1.factor,
+      baseline.correct.random = p,
+      n = length(functionpair.ind),
+      confusion = table(
+        actual = as.character(song.function[functionpair.ind]),
+        predict = predict.nocontext
+      ),
+      coef = sort(coef.nocontext[coef.nocontext != 0])
+    )
+
+}
+
+## selected lasso coefficients
+sink(file.path(
+  results.dir,
+  'disco_pairs_lassocoefs.txt'
+))
+for (functionpair in names(functionpairs.results)){
+  cat('\n', rep('=', 40), '\n\n', sep = '')
+  cat('COMPARISON:', functionpair, '\n')
+  functionpairs.result <- functionpairs.results[[functionpair]]
+  cat('\n', rep('-', 20), '\n\n', sep = '')
+  cat('ACCURACY:', round(functionpairs.result$accuracy, 2), '\n\n')
+  out <- as.matrix(round(functionpairs.result$coef, 2))
+  colnames(out) <- c('SELECTED COEF')
+  print(out)
+}
+sink()
+
+acc <- ldply(functionpairs.results,
+             function(x){
+               data.frame(n = x$n,
+                          accuracy = x$accuracy,
+                          se = x$se,
+                          baseline = x$baseline.correct.random,
+                          function1 = x$function1,
+                          function2 = x$function2
+                          )
+             },
+             .id = 'comparison'
+             )
+acc$cilo <- qnorm(.025) * acc$se + acc$acc
+acc$cihi <- qnorm(.975) * acc$se + acc$acc
+acc$p <- pval.1side.to.2side(
+  pnorm((acc$acc - acc$baseline) / acc$se)
+)
+acc$p.adj <- p.adjust(acc$p, 'BY')
+write.csv(acc,
+          file.path(results.dir, 'disco_pairs_acc.csv'),
+          row.names = FALSE
+          )
+
+## confusion matrix for pairwise comparison
+acc.mat <- matrix(0,
+                  nrow = 4,
+                  ncol = 4,
+                  dimnames = list(levels(song.function),
+                                  levels(song.function)
+                                  )
+                  )
+acc.mat[as.matrix(acc[,c('function1', 'function2')])] <- acc$acc
+acc.mat <- acc.mat + t(acc.mat)
+acc.mat[acc.mat == 0] <- NA
+write.csv(acc.mat)
+
+
+
+
+################
+## disco bpca ##
+################
+
+ndraws <- 1000
+## cambridge zip codes
+seeds <- 02139
+## experts found top 2 dimensions to be interpretable
+Q <- 2
+## run chain
+pca.fname <- file.path(
+  results.dir,
+  sprintf('disco_bpca_mcmc_Q%s_draw%s_seed%05d.rds',
+          Q,
+          ndraws,
+          seeds
+          )
+)
+
+if (!file.exists(pca.fname)){
+  ## single bpca run
+  ##   we're just drawing samples from the ppca posterior, no missingness
+  mod.bpca <- bpca(disco.nocontext.mat,
+                   Q = Q,
+                   maxiter.em = 100,
+                   niter.mcmc = ndraws
+                   )
+  ## flip dimensions so higher complexity is +
+  mod.bpca$mle$W <- -1 * mod.bpca$mle$W
+  mod.bpca$mle$scores <- -1 * mod.bpca$mle$scores
+  mod.bpca$mcmc$W <- -1 * mod.bpca$mcmc$W
+  mod.bpca$mcmc$W.rotate <- -1 * mod.bpca$mcmc$W.rotate
+  mod.bpca$mcmc$scores <- -1 * mod.bpca$mcmc$scores
+  mod.bpca$mcmc$scores.rotate <- -1 * mod.bpca$mcmc$scores.rotate
+  saveRDS(mod.bpca, pca.fname)
+} else {
+  mod.bpca <- readRDS(pca.fname)
+}
+
+## variance explained
+D <- ncol(disco.nocontext.mat)
+var.expl <- colSums(mod.bpca$mle$W^2)
+var.total <- sum(var.expl) + D * mod.bpca$mle$sigmasq
+round(var.expl / sum(var.expl), 3)
+round(var.expl / var.total, 3)
+sum(var.expl / var.total)
+
+## label flipped dimensions
+dim.labels <- c(q.1 = 'melodic complexity',
+                q.2 = 'rhythmic complexity'
+                )
+
+## interpret dimensions by most significantly contributing variables
+interpretation <- ldply(
+    1:ncol(mod.bpca$mle$W),
+    function(q) {
+    est <- apply(mod.bpca$mcmc$W.rotate[,q,], 1, mean)
+    se <- apply(mod.bpca$mcmc$W.rotate[,q,], 1, sd)
+    z <- est / se
+    ind <- order(z)
+    data.frame(variable = rownames(mod.bpca$mle$W)[ind],
+               dim = q,
+               est = est[ind],
+               se = se[ind],
+               z = z[ind]
+               )
+    })
+
+## print to console: all contributing annotations to each dimension
+sink(file.path(
+  results.dir,
+  'disco_bpca_annotation_to_dimension.txt'
+))
+for (q in 1:Q){
+  cat('\n', rep('=', 80),
+      '\n\nDIMENSION ', q, ': ', dim.labels[q], '\n\n', sep = '')
+  interpretation.q <- interpretation[interpretation$dim == q,]
+  interpretation.q$var <- substr(interpretation.q$variable, 1, 47)
+  interpretation.q$var <- interpretation.q$var %.%
+    ifelse(nchar(interpretation.q$variable) > 47, '...', '')
+  rownames(interpretation.q) <-
+    sapply(interpretation.q$var, function(x){
+      x %.% paste(rep(' ', 50 - nchar(x)), collapse = '')
+    })
+  print(interpretation.q[,c('est', 'se', 'z')],
+        digits = 3,
+        width = 3
+        )
+}
+sink()
+
+write.csv(
+  data.frame(song = disco.meta$song,
+             type = song.function,
+             region = song.region,
+             bpca = apply(mod.bpca$mcmc$scores, c(1, 2), mean)
+             ),
+  file.path(results.dir,
+            'disco_bpca_scores.csv'
+            )
+)
+
+
+
+#########################################################
+## analyze song function using within-region variation ##
+#########################################################
+
+nthin <- 10
+nnorm.per.pca.draw <- 100
+
+## regress discography scores on region and song function
+noregionfe.stars <- laply(
+  1:Q,  # latent dimensions to analyze
+  function(q){
+    ## for each latent dimension, get culture fe posterior
+    noregionfe.stars.q <- llply(
+      seq(nthin, ncol(mod.bpca$mcmc$mu), nthin),  # draws to analyze
+      function(draw){
+        ## for each posterior draw, get (culture fe posterior | scores)
+        mod.star <- lm(
+          score.q ~
+            0 +
+            type
+         ,
+          data = na.omit(data.frame(
+            score.q =
+              mod.bpca$mcmc$scores.rotate[, q, draw] -
+              mean(mod.bpca$mcmc$scores.rotate[, q, draw]),
+            nhs_region = disco.meta$nhs_region,
+            type = disco.meta$type
+          ))
+        )
+        coef.star <- mvrnorm(n = nnorm.per.pca.draw,
+                             mu = coef(mod.star),
+                             Sigma = vcov(mod.star)
+                             )
+        return(coef.star)
+      })
+    noregionfe.stars.q <- do.call(rbind, noregionfe.stars.q)
+    return(noregionfe.stars.q)
+  }
+)
+
+noregionfe.summary <- ddply(
+  expand.grid(type1 = song.types,
+              type2 = song.types,
+              dim = 1:Q
+              ),
+  c('type1', 'type2', 'dim'),
+  function(d){
+    i <- d$type1
+    j <- d$type2
+    q <- d$dim
+    diff <- noregionfe.stars[q, , 'type' %.% i] - noregionfe.stars[q, , 'type' %.% j]
+    data.frame(
+      type1 = i,
+      type1.est = mean(noregionfe.stars[q, , 'type' %.% i]),
+      type1.cilo = unname(quantile(noregionfe.stars[q, , 'type' %.% i], .025)),
+      type1.cihi = unname(quantile(noregionfe.stars[q, , 'type' %.% i], .975)),
+      type2 = j,
+      type2.est = mean(noregionfe.stars[q, , 'type' %.% j]),
+      type2.cilo = unname(quantile(noregionfe.stars[q, , 'type' %.% j], .025)),
+      type2.cihi = unname(quantile(noregionfe.stars[q, , 'type' %.% j], .975)),
+      diff.est = ifelse(i == j, NA, mean(diff)),
+      diff.cilo = ifelse(i == j, NA, unname(quantile(diff, .025))),
+      diff.cihi = ifelse(i == j, NA, unname(quantile(diff, .975))),
+      diff.p = ifelse(i == j, NA, pval.1side.to.2side(mean(diff < 0)))
+    )
+  })
+
+noregionfe.summary.uniquepairs <-
+  noregionfe.summary[
+    match(noregionfe.summary$type1, song.types) <
+      match(noregionfe.summary$type2, song.types),
+    ]
+noregionfe.summary.uniquepairs$diff.p.adj <-
+  p.adjust(noregionfe.summary.uniquepairs$diff.p, 'BY')
+
+write.csv(noregionfe.summary.uniquepairs,
+          file.path(results.dir, 'disco_songtype_comparison_noregionfe.csv'),
+          row.names = FALSE
+          )
+
+
+
+## regress discography scores on region and song function
+regionfe.stars <- laply(
+  1:Q,  # latent dimensions to analyze
+  function(q){
+    ## for each latent dimension, get culture fe posterior
+    regionfe.stars.q <- llply(
+      seq(nthin, ncol(mod.bpca$mcmc$mu), nthin),  # draws to analyze
+      function(draw){
+        ## for each posterior draw, get (culture fe posterior | scores)
+        mod.star <- lm(
+          score.q ~
+            0 +
+            type +
+            nhs_region
+         ,
+          data = na.omit(data.frame(
+            score.q =
+              mod.bpca$mcmc$scores.rotate[, q, draw] -
+              mean(mod.bpca$mcmc$scores.rotate[, q, draw]),
+            nhs_region = disco.meta$nhs_region,
+            type = disco.meta$type
+          ))
+        )
+        coef.star <- mvrnorm(n = nnorm.per.pca.draw,
+                             mu = coef(mod.star),
+                             Sigma = vcov(mod.star)
+                             )
+        return(coef.star)
+      })
+    regionfe.stars.q <- do.call(rbind, regionfe.stars.q)
+    return(regionfe.stars.q)
+  }
+)
+
+regionfe.summary <- ddply(
+  expand.grid(type1 = song.types,
+              type2 = song.types,
+              dim = 1:Q
+              ),
+  c('type1', 'type2', 'dim'),
+  function(d){
+    i <- d$type1
+    j <- d$type2
+    q <- d$dim
+    diff <- regionfe.stars[q, , 'type' %.% i] - regionfe.stars[q, , 'type' %.% j]
+    data.frame(
+      type1 = i,
+      type1.est = mean(regionfe.stars[q, , 'type' %.% i]),
+      type1.cilo = unname(quantile(regionfe.stars[q, , 'type' %.% i], .025)),
+      type1.cihi = unname(quantile(regionfe.stars[q, , 'type' %.% i], .975)),
+      type2 = j,
+      type2.est = mean(regionfe.stars[q, , 'type' %.% j]),
+      type2.cilo = unname(quantile(regionfe.stars[q, , 'type' %.% j], .025)),
+      type2.cihi = unname(quantile(regionfe.stars[q, , 'type' %.% j], .975)),
+      diff.est = ifelse(i == j, NA, mean(diff)),
+      diff.cilo = ifelse(i == j, NA, unname(quantile(diff, .025))),
+      diff.cihi = ifelse(i == j, NA, unname(quantile(diff, .975))),
+      diff.p = ifelse(i == j, NA, pval.1side.to.2side(mean(diff < 0)))
+    )
+  })
+
+regionfe.summary.uniquepairs <-
+  regionfe.summary[
+    match(regionfe.summary$type1, song.types) <
+      match(regionfe.summary$type2, song.types),
+    ]
+regionfe.summary.uniquepairs$diff.p.adj <-
+  p.adjust(regionfe.summary.uniquepairs$diff.p, 'BY')
+
+write.csv(regionfe.summary.uniquepairs,
+          file.path(results.dir, 'disco_songtype_comparison_regionfe.csv'),
           row.names = FALSE
           )
