@@ -3,10 +3,10 @@
 "naive","Healing",6,5,16,1
 "naive","Love",8,5,7,10
 "naive","Lullaby",3,2,11,14
-"mir","Dance",3,11,13,3
+"mir","Dance",3,11,12,4
 "mir","Healing",8,4,9,7
 "mir","Love",9,9,6,6
-"mir","Lullaby",5,4,8,13
+"mir","Lullaby",5,4,7,14
 "mir.panteli","Dance",12,6,7,5
 "mir.panteli","Healing",7,5,10,6
 "mir.panteli","Love",9,7,10,4
@@ -16,7 +16,7 @@
 "expert","Love",8,3,15,4
 "expert","Lullaby",4,0,13,13
 "transcription","Dance",8,11,6,5
-"transcription","Healing",8,12,3,5
+"transcription","Healing",7,13,3,5
 "transcription","Love",6,5,10,9
 "transcription","Lullaby",7,7,11,5
 "nocontext","Dance",14,2,11,3

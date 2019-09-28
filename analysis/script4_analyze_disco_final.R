@@ -568,6 +568,7 @@ hraf.subregion <- disco.naive$hraf_subregion
 nhs.subsistence <- disco.naive$nhs_subsistence
 
 fold.vars <- data.frame("old_world_new_world" = ow.nw,
+                        "song_region" = song.region,
                         "hraf_region" = hraf.region,
                         "hraf_subregion" = hraf.subregion,
                         "nhs_subsistence" = nhs.subsistence)
@@ -605,7 +606,8 @@ disco.nocontext.mat <- cbind(
 ## categorical classification, split by dataset ##
 ##################################################
 
-fold.vars.g1 <- c("hraf_region",
+fold.vars.g1 <- c("song_region",
+                  "hraf_region",
                   "hraf_subregion",
                   "nhs_subsistence")
 
@@ -957,7 +959,6 @@ for(lambda in lambda.seq){
         }
     }
     llk <- -total.error
-    cat("\nllk\n")
     if(total.error < best.error){
         best.error <- total.error
 
@@ -1199,6 +1200,7 @@ mod.nocontext <- cv.glmnet(
     keep = TRUE
 )
 lambda.seq <- mod.nocontext$lambda
+lambda.seq <- lambda.seq[lambda.seq > 6.486229e-05] # Doesn't converge for the smallest lambdas
 
 best.error <- Inf
 for(lambda in lambda.seq){
@@ -1543,159 +1545,3 @@ write.csv(
 )
 
 
-
-#########################################################
-## analyze song function using within-region variation ##
-#########################################################
-
-nthin <- 10
-nnorm.per.pca.draw <- 100
-
-## regress discography scores on region and song function
-noregionfe.stars <- laply(
-  1:Q,  # latent dimensions to analyze
-  function(q){
-    ## for each latent dimension, get culture fe posterior
-    noregionfe.stars.q <- llply(
-      seq(nthin, ncol(mod.bpca$mcmc$mu), nthin),  # draws to analyze
-      function(draw){
-        ## for each posterior draw, get (culture fe posterior | scores)
-        mod.star <- lm(
-          score.q ~
-            0 +
-            type
-         ,
-          data = na.omit(data.frame(
-            score.q =
-              mod.bpca$mcmc$scores.rotate[, q, draw] -
-              mean(mod.bpca$mcmc$scores.rotate[, q, draw]),
-            nhs_region = disco.meta$nhs_region,
-            type = disco.meta$type
-          ))
-        )
-        coef.star <- mvrnorm(n = nnorm.per.pca.draw,
-                             mu = coef(mod.star),
-                             Sigma = vcov(mod.star)
-                             )
-        return(coef.star)
-      })
-    noregionfe.stars.q <- do.call(rbind, noregionfe.stars.q)
-    return(noregionfe.stars.q)
-  }
-)
-
-noregionfe.summary <- ddply(
-  expand.grid(type1 = song.types,
-              type2 = song.types,
-              dim = 1:Q
-              ),
-  c('type1', 'type2', 'dim'),
-  function(d){
-    i <- d$type1
-    j <- d$type2
-    q <- d$dim
-    diff <- noregionfe.stars[q, , 'type' %.% i] - noregionfe.stars[q, , 'type' %.% j]
-    data.frame(
-      type1 = i,
-      type1.est = mean(noregionfe.stars[q, , 'type' %.% i]),
-      type1.cilo = unname(quantile(noregionfe.stars[q, , 'type' %.% i], .025)),
-      type1.cihi = unname(quantile(noregionfe.stars[q, , 'type' %.% i], .975)),
-      type2 = j,
-      type2.est = mean(noregionfe.stars[q, , 'type' %.% j]),
-      type2.cilo = unname(quantile(noregionfe.stars[q, , 'type' %.% j], .025)),
-      type2.cihi = unname(quantile(noregionfe.stars[q, , 'type' %.% j], .975)),
-      diff.est = ifelse(i == j, NA, mean(diff)),
-      diff.cilo = ifelse(i == j, NA, unname(quantile(diff, .025))),
-      diff.cihi = ifelse(i == j, NA, unname(quantile(diff, .975))),
-      diff.p = ifelse(i == j, NA, pval.1side.to.2side(mean(diff < 0)))
-    )
-  })
-
-noregionfe.summary.uniquepairs <-
-  noregionfe.summary[
-    match(noregionfe.summary$type1, song.types) <
-      match(noregionfe.summary$type2, song.types),
-    ]
-noregionfe.summary.uniquepairs$diff.p.adj <-
-  p.adjust(noregionfe.summary.uniquepairs$diff.p, 'BY')
-
-write.csv(noregionfe.summary.uniquepairs,
-          file.path(results.dir, 'disco_songtype_comparison_noregionfe.csv'),
-          row.names = FALSE
-          )
-
-
-
-## regress discography scores on region and song function
-regionfe.stars <- laply(
-  1:Q,  # latent dimensions to analyze
-  function(q){
-    ## for each latent dimension, get culture fe posterior
-    regionfe.stars.q <- llply(
-      seq(nthin, ncol(mod.bpca$mcmc$mu), nthin),  # draws to analyze
-      function(draw){
-        ## for each posterior draw, get (culture fe posterior | scores)
-        mod.star <- lm(
-          score.q ~
-            0 +
-            type +
-            nhs_region
-         ,
-          data = na.omit(data.frame(
-            score.q =
-              mod.bpca$mcmc$scores.rotate[, q, draw] -
-              mean(mod.bpca$mcmc$scores.rotate[, q, draw]),
-            nhs_region = disco.meta$nhs_region,
-            type = disco.meta$type
-          ))
-        )
-        coef.star <- mvrnorm(n = nnorm.per.pca.draw,
-                             mu = coef(mod.star),
-                             Sigma = vcov(mod.star)
-                             )
-        return(coef.star)
-      })
-    regionfe.stars.q <- do.call(rbind, regionfe.stars.q)
-    return(regionfe.stars.q)
-  }
-)
-
-regionfe.summary <- ddply(
-  expand.grid(type1 = song.types,
-              type2 = song.types,
-              dim = 1:Q
-              ),
-  c('type1', 'type2', 'dim'),
-  function(d){
-    i <- d$type1
-    j <- d$type2
-    q <- d$dim
-    diff <- regionfe.stars[q, , 'type' %.% i] - regionfe.stars[q, , 'type' %.% j]
-    data.frame(
-      type1 = i,
-      type1.est = mean(regionfe.stars[q, , 'type' %.% i]),
-      type1.cilo = unname(quantile(regionfe.stars[q, , 'type' %.% i], .025)),
-      type1.cihi = unname(quantile(regionfe.stars[q, , 'type' %.% i], .975)),
-      type2 = j,
-      type2.est = mean(regionfe.stars[q, , 'type' %.% j]),
-      type2.cilo = unname(quantile(regionfe.stars[q, , 'type' %.% j], .025)),
-      type2.cihi = unname(quantile(regionfe.stars[q, , 'type' %.% j], .975)),
-      diff.est = ifelse(i == j, NA, mean(diff)),
-      diff.cilo = ifelse(i == j, NA, unname(quantile(diff, .025))),
-      diff.cihi = ifelse(i == j, NA, unname(quantile(diff, .975))),
-      diff.p = ifelse(i == j, NA, pval.1side.to.2side(mean(diff < 0)))
-    )
-  })
-
-regionfe.summary.uniquepairs <-
-  regionfe.summary[
-    match(regionfe.summary$type1, song.types) <
-      match(regionfe.summary$type2, song.types),
-    ]
-regionfe.summary.uniquepairs$diff.p.adj <-
-  p.adjust(regionfe.summary.uniquepairs$diff.p, 'BY')
-
-write.csv(regionfe.summary.uniquepairs,
-          file.path(results.dir, 'disco_songtype_comparison_regionfe.csv'),
-          row.names = FALSE
-          )
