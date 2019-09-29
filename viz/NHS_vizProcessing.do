@@ -192,7 +192,7 @@ export delimited using vizData/tonalityScatter.csv, replace
 ***********
 
 ** get bpca scores
-insheet using ../results/disco_bpca_scores_final.csv, names clear
+insheet using ../results/disco_bpca_scores.csv, names clear
 
 ** cleanup
 drop song
