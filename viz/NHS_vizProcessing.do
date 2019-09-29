@@ -198,9 +198,6 @@ insheet using ../results/disco_bpca_scores.csv, names clear
 drop song
 rename v1 song
 
-** reverse dim 1 (dim 2 doesn't get reversed)
-replace bpca1 = -1*bpca1
-
 ** export clean csv
 export delimited using vizData/discogBPCA.csv, replace
 
