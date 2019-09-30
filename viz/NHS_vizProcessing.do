@@ -107,11 +107,20 @@ keep type lat lon
 ** export clean csv
 export delimited using vizData/discogMap.csv, replace
 
-********************************
-** Nothing required for Fig 5 ** // World Music Quiz heatmap & LASSO barplots
-********************************
+***********
+** Fig 5 ** // World Music Quiz heatmap & LASSO barplots
+***********
 
-** n.b., heatmap was made manually in Google Sheets
+** n.b. nothing required for heatmap; it was made in a google sheet
+
+** get categorical lasso data
+insheet using ../results/song_region_disco_overall_acc.csv, names clear
+
+** remove older MIR data that lacks Panteli features
+drop if featureset=="mir"
+
+** export clean csv
+export delimited using vizData/catLASSO.csv
 
 ************
 ** Fig 6A ** // Tonality histogram

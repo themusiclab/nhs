@@ -17,7 +17,7 @@ library(yarrr)
 ## read in all datasets
 ethnogMap <- read.csv("ethnogMap.csv")
 ethnogBPCA <- read.csv("ethnogBPCA.csv")
-disco_mlasso <- read.csv("../../results/disco_overall_acc_final.csv")
+disco_mlasso <- read.csv("catLASSO.csv")
 disco_llasso <- read.csv("../../results/disco_pairs_acc_final.csv")
 discogBPCA <- read.csv("discogBPCA.csv")
 tonalityHistogram <- read.csv("tonalityHistogram.csv")
@@ -372,9 +372,9 @@ ggsave("../pdf/NHS_fig3C.pdf", width = 5, height = 10)
 ## Fig 5 ###########################################################################################################
 
 ## categorical lasso
-fig6b <- disco_mlasso
-fig6b %>%
-  mutate(feature.set = fct_relevel(feature.set, "mir", "naive", "expert", "transcription", "nocontext")) %>%
+fig5b <- disco_mlasso
+fig5b %>%
+  mutate(feature.set = fct_relevel(featureset, "mir.panteli", "naive", "expert", "transcription", "nocontext")) %>%
   ggplot(aes(x = feature.set, y = accuracy)) +
     geom_hline(yintercept = .25, color = "red", size = 1.5, linetype = "dashed") +
     geom_hline(yintercept = .424, color = "blue", size = 1.5, linetype = "dashed") +
@@ -394,11 +394,11 @@ fig6b %>%
                        limits = c(0,1.05),
                        breaks = c(.10,.20,.3,.4,.5,.6,.7,.8,.9,1),
                        labels = c("10%","20%","30%","40%","50%","60%","70%","80%","90%","100%"))
-ggsave("../pdf/NHS_fig6B.pdf", width = 4, height = 4)
+ggsave("../pdf/NHS_fig5B.pdf", width = 4, height = 4)
 
 ## logistic lasso
 (
-fig6c <- ggplot(data = disco_llasso, aes(x = reorder(comparison, accuracy), y = accuracy)) +
+fig5c <- ggplot(data = disco_llasso, aes(x = reorder(comparison, accuracy), y = accuracy)) +
           geom_hline(yintercept = .50, color = "red", size = 1.5, linetype = "dashed") +
           geom_bar(stat = "identity", alpha = .8, colour = "black", fill = "#4568DC") +
           geom_errorbar(aes(ymin = cilo, ymax = cihi), width = .1) +
@@ -417,7 +417,7 @@ fig6c <- ggplot(data = disco_llasso, aes(x = reorder(comparison, accuracy), y = 
                              breaks = c(.10,.20,.3,.4,.5,.6,.7,.8,.9,1),
                              labels = c("10%","20%","30%","40%","50%","60%","70%","80%","90%","100%"))
 )
-ggsave("../pdf/NHS_fig6C.pdf", width = 4, height = 4)
+ggsave("../pdf/NHS_fig5C.pdf", width = 4, height = 4)
 
 ## Fig 6 ###########################################################################################################
 
