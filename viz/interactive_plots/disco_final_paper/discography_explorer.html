@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Interactive Discography Plot</title>
+
+    <link rel="stylesheet" href="css/styles.css" charset="utf-8">
+    <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/98/three.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <div id="ui">
+      <input id="infoBox" class="btn" type="button" name="info" value="How to use this plot" onclick="showInfoBox()"><br>
+      <span style="padding-left:8px">Color:</span>
+      <select id="colorSelector" class="slt" onchange="changeColors()">
+      </select>
+      <span style="padding-left:8px">Size:<br></span>
+      <select id="radiusSelector" class="slt" onchange="changeRadiuses()"></select><br>
+      <input type="button" class="btn" name="origin" value="Reset to origin" onclick="backToOrigin()">
+            
+
+
+    </div>
+
+    <div id="scatter2D"></div>
+
+    <script src="js/scatter2d.js" charset="utf-8"></script>
+
+    <div id="tooltip">
+
+        <div class="audio">
+            <audio id="audio" controls>
+                <source src="audio/1.wav" type="audio/wav">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        <div class="close" onclick="closeTooltip()">X</div>
+        <div id="type" class="type">{type}</div>
+        <div id="culture" class="culture">{culture}</div>
+        <div id="hraf_region" class="region">{hraf_region}</div>
+        <div id="hraf_subregion" class="sub">{hraf_subregion}</div>
+        <div id="year" class="year">{year}</div>
+        <div id="collector_name" class="collector">{collector_name}</div>
+        <div id="citation" class="citation">{citation}</div>
+        <div id="permalink" class="perma">{permalink}</div>
+
+    </div>
+
+    <div id="infoPopup">
+
+        <div class="headerInfo"></div>
+        <div class="closeInfo" onclick="closeInfo()">X</div>
+        <div class="info" onclick="closeInfo()">This interactive plot shows the songs of NHS Discography along two dimensions: melodic complexity (PC1, the x-axis) and rhythmic complexity (PC2, the y-axis). Each point represents a song in the discography. Click the points to listen to the songs and learn more about the recordings. Use the “Color” dropdown to choose a categorical variable and the “Size” dropdown to choose an ordinal variable. Select and deselect items in the legend below to show or hide them from the plot.</div>
+
+    </div>
+
+    <div id="culturesPopup">
+
+        <div id="selectAll" class="header"></div>
+        <div class="closePopup" onclick="closePopup()">X</div>
+        <div id="Africa" class="region1">Africa</div>
+        <div id="Asia" class="region2">Asia</div>
+        <div id="Oceania" class="region3">Oceania</div>
+        <div id="South_America" class="region4">South America</div>
+        <div id="North_America" class="region5">North America</div>
+        <div id="Europe" class="region6">Europe</div>
+        <div id="Middle_America_and_the_Caribbean" class="region7">Middle America</div>
+        <div id="Middle_East" class="region8">Middle East</div>
+
+    </div>
+
+</body>
+
+</html>
