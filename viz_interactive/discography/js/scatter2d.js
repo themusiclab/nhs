@@ -1,5 +1,5 @@
  var CSV_PREFIX = "data/";
- var CSV_URL = "disco_bpca_scores_20181229_rev_highlight.csv";
+ var CSV_URL = "disco_bpca_scores_highlighted.csv";
  var REFERENCE_URL = "reference_points.csv";
 
  var DATASET_PREFIX = "data/dataset/";
