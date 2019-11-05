@@ -1,0 +1,245 @@
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Interactive Ethnography Plot</title>
+    <meta name="description" content="Ehno based on D3.JS | THREE.JS stack.">
+    <meta name="keywords" content="HTML,CSS,CSV,JavaScript,D3.JS,THREE.JS">
+    <link rel="stylesheet" href="css/styles.css" charset="utf-8">
+    <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="//d3js.org/d3-scale-chromatic.v0.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/98/three.min.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/stats.min.js"></script>
+
+</head>
+
+<script type='x-shader/x-vertex' id='vertexShader'>
+
+      uniform sampler2D textureA;
+      uniform sampler2D textureB;
+      uniform vec3 orientation;
+      uniform vec3 direction;
+      uniform float scale;
+      uniform float zoom; 
+      attribute vec3 popup;
+      attribute float radius;
+      attribute float radius_indx;
+      attribute float radiusText;
+      attribute vec3 color;
+      attribute float opacity;
+      attribute float color_indx;
+      attribute vec3 visibility;
+      attribute float highlight;
+      
+      varying vec3 transvis;
+      varying vec3 vColor;
+      varying float vOpacity;
+      varying float vIndexC;
+      varying float vIndexR;
+      varying float texture;
+ 
+      /*
+      
+      If you want dynamic radius (nodes grow/shrink on zooming)
+      replace
+      
+      gl_PointSize = radius;
+      
+      with 
+      
+      gl_PointSize = 2.0 * radius * ( scale / -mvPosition.z );
+      
+      where 2.0 is pixelRatio, could make it dynamic as well
+      
+      gl_PointSize = radius;
+      SHOULD BE REPLACED IN BOTH SHADERS
+      
+      */
+        
+      void main() {
+      
+        vColor = color;
+        vOpacity = opacity;
+
+        if(highlight > 0.5) { vColor = popup; }
+        
+        texture = radiusText;
+        vIndexR = radius_indx;
+        vIndexC = color_indx;
+        
+        transvis = visibility;
+        
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        gl_PointSize = radius;
+        gl_Position = projectionMatrix * mvPosition;
+        
+      }
+   </script>
+    
+<script type='x-shader/x-fragment' id='fragmentShader'>
+
+      precision highp float;
+      varying vec3 vColor;
+      varying float vIndexC;
+      varying float vIndexR;
+      uniform sampler2D textureA;
+      uniform sampler2D textureB;
+      uniform float useColor;
+      varying vec3 transvis;
+      varying float texture;
+      varying float vOpacity;
+      
+      void main() {
+      
+          if(vIndexC < 0. || vIndexR < 0.) discard;
+          gl_FragColor = vec4(vColor, vOpacity);
+
+          if(texture < 1.5) {
+          gl_FragColor = gl_FragColor * texture2D(textureA, gl_PointCoord);
+          }else{
+          gl_FragColor = gl_FragColor * texture2D(textureB, gl_PointCoord);
+          }
+ 
+          if (gl_FragColor.a < 0.1 || transvis.x < 0.5 || transvis.y < 0.5 || transvis.z < 0.5) discard; 
+      
+      }
+
+   </script>
+    
+    
+<script type='x-shader/x-vertex' id='vertexShaderTarget'>
+
+      uniform sampler2D textureA;
+      uniform sampler2D textureB;
+      uniform vec3 orientation;
+      uniform vec3 direction;
+      uniform float scale;
+      uniform float zoom; 
+      attribute vec3 popup;
+      attribute float radius;
+      attribute float radius_indx;
+      attribute float radiusText;
+      attribute vec3 color;
+      attribute float color_indx;
+      attribute vec3 visibility;
+      attribute float enabled;
+      attribute float zBuffer;
+      varying vec3 transvis;
+      varying vec3 vColor;
+      varying float vIndexC;
+      varying float vIndexR;
+      varying float texture;
+ 
+      /*
+      
+      gl_PointSize = radius;
+      SHOULD BE REPLACED IN BOTH SHADERS
+      see instructions at first vertex shader
+      
+      */
+        
+      void main() {
+      
+        vColor = popup;
+        
+        texture = radiusText;
+        vIndexR = radius_indx;
+        vIndexC = color_indx;
+        
+        transvis = visibility;
+        
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        gl_PointSize = radius;
+        gl_Position = projectionMatrix * mvPosition;
+        
+      }
+   </script>
+    
+<script type='x-shader/x-fragment' id='fragmentShaderTarget'>
+
+      precision highp float;
+      varying vec3 vColor;
+      varying float vIndexC;
+      varying float vIndexR;
+      uniform sampler2D textureA;
+      uniform sampler2D textureB;
+      uniform float useColor;
+      varying vec3 transvis;
+      varying float texture;
+      varying float opacity;
+      
+      void main() {
+      
+          if(vIndexC < 0. || vIndexR < 0.) discard;
+          gl_FragColor = vec4(vColor, 1.0);
+
+          if(texture < 1.5) {
+          gl_FragColor = gl_FragColor * texture2D(textureA, gl_PointCoord);
+          }else{
+          gl_FragColor = gl_FragColor * texture2D(textureB, gl_PointCoord);
+          }
+ 
+          if (gl_FragColor.a < 0.5 || transvis.x < .5 || transvis.y < 0.5 || transvis.z < 0.5) discard; 
+      
+      }
+
+   </script>
+    
+
+<body>
+
+    <div id="ui">
+      <input id="infoBox" class="btn" type="button" name="info" value="How to use this plot" onclick="showInfoBox()"><br>      
+      <span style="padding-left:8px">Color:</span>
+      <select id="colorSelector" class="slt" onchange="changeColors()">
+      </select>
+      <span style="padding-left:8px">Size:</span>
+      <select id="radiusSelector" class="slt" onchange="changeRadiuses()"></select>
+      <span style="padding-left:8px">Plot Controls:</span><br>
+      <input type="button" class="btn" name="origin" value="Click to re-center" onclick="backToOrigin()"><br>
+      <input id="cntrl" class="btn" type="button" name="Rotate" value="Rotate" onclick="switchControls('ui')">
+      <input id="filter" class="btn" type="button" name="filter" value="filter off" onclick="filterPoints()">
+
+    </div>
+
+    <div id="scatter3D"></div>
+    <script src="js/scatter3d.js" charset="utf-8"></script>
+
+    <div id="tooltip">
+        <div id="" class="clear"></div>
+        <div class="close" onclick="closeTooltip()">X</div>
+        <div id="culture" class="culture">{culture}</div>
+        <div id="text" class="text">{text}</div>
+        <div id="lyric" class="lyric">{lyric}</div>
+        <div id="cite_text" class="cite">{cite_text}</div>
+        <div id="ocm" class="ocm">{ocm}</div>
+    </div>
+
+    <div id="infoPopup">
+
+        <div class="headerInfo"></div>
+        <div class="closeInfo" onclick="closeInfo()">X</div>
+        <div class="info" onclick="closeInfo()">This interactive plot shows descriptions of singing behavior from NHS Ethnography along three dimensions: formality, affect, and religiosity. Each point represents a ethnographic description of singing. Click the points to read the descriptions and any available lyrics. Use the "Color" dropdown to choose a categorical variable and the "Size" dropdown to choose an ordinal variable. Select and deselect items in the legend below to show or hide them from the plot.</div>
+
+    </div>
+
+    <div id="culturesPopup">
+
+        <div id="selectAll" class="header"></div>
+        <div class="closePopup" onclick="closePopup()">X</div>
+        <div id="Africa" class="region1">Africa</div>
+        <div id="Asia" class="region2">Asia</div>
+        <div id="Oceania" class="region3">Oceania</div>
+        <div id="South_America" class="region4">South America</div>
+        <div id="North_America" class="region5">North America</div>
+        <div id="Europe" class="region6">Europe</div>
+        <div id="Middle_America_and_the_Caribbean" class="region7">Middle America</div>
+        <div id="Middle_East" class="region8">Middle East</div>
+
+    </div>
+
+</body>
+
+</html>

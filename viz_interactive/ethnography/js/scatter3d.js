@@ -79,7 +79,7 @@ var ethno = {
             index: "NHSEthnography_AnnotateSec.audience_sex",
             option: "Sex of Audience Member(s)",
             dict: ["Male", "Female", "Both sexes"],
-            colors: ["#0B4958", "#4D8A7C", "#C4DB94", "#FFF38B", "#FDB681"],
+            colors: ["#6D98F3", "#E96465", "#F9C659", "#6AB878", "#D3D3D3"],
             f: function (n_) {
 
                 var found = 0;
@@ -102,7 +102,7 @@ var ethno = {
             index: "NHSEthnography_AnnotatePrim.singers_sex",
             option: "Sex of Singer(s)",
             dict: ["Male", "Female", "Both sexes"],
-            colors: ["#2B3A42", "#3F5866", "#BDD3DE", "#F0F0DF", "#FF8F00"],
+            colors: ["#6D98F3", "#E96465", "#F9C659", "#6AB878", "#D3D3D3"],
             f: function (n_) {
 
                 var found = 0;
@@ -125,7 +125,7 @@ var ethno = {
             index: "NHSEthnography_AnnotatePrim.instrument",
             option: "Musical Instrument(s)",
             dict: ["non-instrumental", "instrumental"],
-            colors: ["#725368", "#8D7688", "#F1EEDB", "#D9B4A3", "#C19185"],
+            colors: ["#6D98F3", "#E96465", "#F9C659", "#6AB878", "#D3D3D3"],
             f: function (n_) {
                 if (n_ == "." || n_ == "") {
                     return -1;
@@ -137,7 +137,7 @@ var ethno = {
             index: "NHSEthnography_AnnotatePrim.ceremony",
             option: "Ceremony",
             dict: ["non-ceremonical", "ceremonical"],
-            colors: ["#2B3A42", "#3F5866", "#BDD3DE", "#F0F0DF", "#FF8F00"],
+            colors: ["#6D98F3", "#E96465", "#F9C659", "#6AB878", "#D3D3D3"],
             f: function (n_) {
                 if (n_ == "." || n_ == "") {
                     return -1;
@@ -149,7 +149,7 @@ var ethno = {
             index: "NHSEthnography_AnnotatePrim.trance",
             option: "Trance",
             dict: ["no trance", "trance"],
-            colors: ["#FCDCA3", "#FBC57B", "#F5A64A", "#EA640D", "#BF381A"],
+            colors: ["#6D98F3", "#E96465", "#F9C659", "#6AB878", "#D3D3D3"],
             f: function (n_) {
                 if (n_ == "." || n_ == "") {
                     return -1;
@@ -161,7 +161,7 @@ var ethno = {
             index: "NHSEthnography_AnnotatePrim.child_for",
             option: "Infant/child-directed singing",
             dict: ["not for child", "for child"],
-            colors: ["#5BD6FC", "#175163", "#83C9B4", "#F5E0DF", "#FC6D95"],
+            colors: ["#6D98F3", "#E96465", "#F9C659", "#6AB878", "#D3D3D3"],
             f: function (n_) {
                 if (n_ == "." || n_ == "") {
                     return -1;
@@ -173,7 +173,7 @@ var ethno = {
             index: "NHSEthnography_AnnotatePrim.audience_dance",
             option: "Dancing by Audience Member(s)",
             dict: ["audience didn't dance", "audience danced"],
-            colors: ["#0B4958", "#4D8A7C", "#C4DB94", "#FFF38B", "#FDB681"],
+            colors: ["#6D98F3", "#E96465", "#F9C659", "#6AB878", "#D3D3D3"],
             f: function (n_) {
                 if (n_ == "." || n_ == "") {
                     return -1;
@@ -185,7 +185,7 @@ var ethno = {
             index: "NHSEthnography_AnnotatePrim.singers_dance",
             option: "Dancing by Singer(s)",
             dict: ["singer(s) didn't dance", "singer(s) danced"],
-            colors: ["#FFBC67", "#DA727E", "#AC6C82", "#685C79", "#455C7B"],
+            colors: ["#6D98F3", "#E96465", "#F9C659", "#6AB878", "#D3D3D3"],
             f: function (n_) {
                 if (n_ == "." || n_ == "") {
                     return -1;
@@ -200,9 +200,9 @@ var ethno = {
 
         {
             index: "na",
-            option: "NA",
+            option: "(No size variable selected)",
             dict: [{
-                l: "unified",
+                l: "All instances of song",
                 r: 4.9
             }],
             f: function (n_, key_) {
@@ -417,10 +417,6 @@ var ethno = {
                 r: 15.0,
                 t: 1
             }, {
-                l: "Multiple listeners (number unknown)",
-                r: 50.0,
-                t: 2
-            }, {
                 l: "21-30 listeners",
                 r: 25.0,
                 t: 1
@@ -523,10 +519,6 @@ var ethno = {
                     r: 15.0,
                     t: 1
                 }, {
-                    l: "Multiple singers (number unknown)",
-                    r: 50.0,
-                    t: 2
-                }, {
                     l: "21-30 singers",
                     r: 25.0,
                     t: 1
@@ -625,7 +617,7 @@ var parameters = {
     popup: ["text", "lyric", "cite_text", "ocm"],
     
     defaultAlpha : 0.5,         //for all points except highlighted & referenced
-    defaultAlpha2 : 0.05,       //all points on highlighted mode ON
+    defaultAlpha2 : 0.1,       //all points on highlighted mode ON
     
     highlightedAlpha : 0.9,
     highlightedDarker : 1.2,
@@ -666,7 +658,9 @@ var parameters = {
     gridMarkup: 16, //# of cols/rows
     axisValuesFontSize: "10px",
 
-    radiusScale: d3.scaleLinear().domain([1, 10]).range([4.9, 20]),
+    //radiusScale: d3.scaleLinear().domain([1, 10]).range([2, 10]),
+    //radiusScale: d3.scaleSqrt().domain([1, 10]).range([3, 20]),
+    radiusScale: d3.scaleLinear().domain([1, 10]).range([2, 20]),
     radiusRange: {
         1: {
             min: Number.POSITIVE_INFINITY,
@@ -736,7 +730,6 @@ var rendering = true;
 d3.csv(CSV_PREFIX + CSV_URL, function (error_, data_) {
 
     if (error_) throw error_;
-
     setSelectors();
 
     data_.forEach(function (d_) {
@@ -1764,8 +1757,8 @@ function animate() {
     axes = [
 
 		[new THREE.Vector3(146.0 / scale, 1E-5, 1E-5), new THREE.Vector3(237.0 / scale, 1E-5, 1E-5)],
-		[new THREE.Vector3(1E-5, 146.0 / scale, 1E-5), new THREE.Vector3(1E-5, 237.0 / scale, 1E-5)],
-		[new THREE.Vector3(1E-5, 1E-5, 146.0 / scale), new THREE.Vector3(1E-5, 1E-5, 237.0 / scale)]
+		[new THREE.Vector3(1E-5, 136.0 / scale, 1E-5), new THREE.Vector3(1E-5, 247.0 / scale, 1E-5)],
+		[new THREE.Vector3(1E-5, 1E-5, 136.0 / scale), new THREE.Vector3(1E-5, 1E-5, 237.0 / scale)]
 
 	];
 
@@ -2031,24 +2024,41 @@ function fillTheBuffer(out_) {
 }
 
 function filterPoints(){
+
     parameters.filtered = !parameters.filtered;
-    buffer.opacity[4710] = 0;
-
+    
     if(parameters.filtered){
+        
+        for(var i = 1; i < points.length; i++){
 
-        for(var i = 1; i < points.length - 1; i++){
+             if(!JSON.parse(points[i].highlighted)) { 
+                 
+                 buffer.opacity[i] = parameters.defaultAlpha2;
+                 buffer.visibility[i * 3] = 0.0;
+                 buffer.visibility[i * 3 + 1] = 0.0;
+                 buffer.visibility[i * 3 + 2] = 0.0;
 
-             if(!JSON.parse(points[i + 1].highlighted)) { buffer.opacity[i] = parameters.defaultAlpha2; }
+             }
+            
+
              document.getElementById("filter").value = "filter on";
-	    
-        }
+            
+        } 
         
         
     }else{
                          
-        for(var i = 1; i < points.length - 1; i++){	     
-	    
-             if(!JSON.parse(points[i + 1].highlighted)) { buffer.opacity[i] = parameters.defaultAlpha; }
+        for(var i = 1; i < points.length; i++){
+            
+             if(!JSON.parse(points[i].highlighted)) { 
+                 
+                 buffer.opacity[i] = parameters.defaultAlpha; 
+                 buffer.visibility[i * 3] = 1.0;
+                 buffer.visibility[i * 3 + 1] = 1.0;
+                 buffer.visibility[i * 3 + 2] = 1.0;
+             
+             }
+
              document.getElementById("filter").value = "filter off";
             
         } 
@@ -2056,6 +2066,7 @@ function filterPoints(){
     }
               
     pointCloud.geometry.attributes.opacity.needsUpdate = true;
+    pointCloud.geometry.attributes.visibility.needsUpdate = true;
     
 }
 
@@ -2480,32 +2491,35 @@ function switchControls(key_) {
 
         if (cntrl.value == "Rotate") {
 
-            cntrl.value = parameters.mousemode;
+            cntrl.value = cntrl.name = "Drag";
             parameters.drag = true;
-            controls.mouseButtons = { ORBIT: THREE.MOUSE.RIGHT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.LEFT }; 
+            controls.mouseButtons = { ORBIT: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT }; 
 
 	    
         } else {
 
-            cntrl.value = "Rotate";
+            cntrl.value = cntrl.name = "Rotate";
             parameters.drag = false;
-            controls.mouseButtons = { ORBIT: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT };
+            controls.mouseButtons = { ORBIT: THREE.MOUSE.RIGHT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.LEFT };
 
         }
-    } else {
+	
+    }
+
+    else {
 
         if (key_ == "shiftDown") {
 
-            cntrl.value = parameters.mousemode;
-            controls.mouseButtons = { ORBIT: THREE.MOUSE.RIGHT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.LEFT };
+            cntrl.value = cntrl.name = "Drag";
+            controls.mouseButtons = { ORBIT: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT };
             parameters.drag = true;
             parameters.shift = true;
 
 
         } else {
 
-            cntrl.value = "Rotate";
-            controls.mouseButtons = { ORBIT: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT };
+            cntrl.value = cntrl.name = "Rotate";
+            controls.mouseButtons = { ORBIT: THREE.MOUSE.RIGHT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.LEFT };
             parameters.drag = false;
             parameters.shift = false;
 
