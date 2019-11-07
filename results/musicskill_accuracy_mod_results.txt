@@ -1,0 +1,23 @@
+
+Call:
+lm(formula = correct ~ musicskill, data = dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.4550 -0.4507 -0.4417  0.5493  0.5583 
+
+Coefficients:
+            Estimate Std. Error t value             Pr(>|t|)    
+(Intercept) 0.441747   0.002891 152.820 < 0.0000000000000002 ***
+musicskill2 0.004474   0.004245   1.054              0.29193    
+musicskill3 0.008951   0.003756   2.383              0.01716 *  
+musicskill4 0.013219   0.004530   2.918              0.00352 ** 
+musicskill5 0.005314   0.008497   0.625              0.53169    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.4973 on 123991 degrees of freedom
+  (61836 observations deleted due to missingness)
+Multiple R-squared:  8.32e-05,	Adjusted R-squared:  5.094e-05 
+F-statistic: 2.565 on 4 and 16245 DF,  p-value: 0.03632
+
