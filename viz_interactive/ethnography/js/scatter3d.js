@@ -1628,7 +1628,7 @@ function init(font_) {
     controls.minDistance = parameters.zoomLimits.min;
     controls.maxDistance = parameters.zoomLimits.max;
 
-    controls.mouseButtons = { ORBIT: THREE.MOUSE.RIGHT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.LEFT };
+    controls.mouseButtons = { ORBIT: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT };
     
     raycaster = new THREE.Raycaster();
     mouse = new THREE.Vector2();
@@ -2493,14 +2493,14 @@ function switchControls(key_) {
 
             cntrl.value = cntrl.name = "Drag";
             parameters.drag = true;
-            controls.mouseButtons = { ORBIT: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT }; 
+            controls.mouseButtons = { ORBIT: THREE.MOUSE.RIGHT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.LEFT }; 
 
 	    
         } else {
 
             cntrl.value = cntrl.name = "Rotate";
             parameters.drag = false;
-            controls.mouseButtons = { ORBIT: THREE.MOUSE.RIGHT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.LEFT };
+            controls.mouseButtons = { ORBIT: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT };
 
         }
 	
