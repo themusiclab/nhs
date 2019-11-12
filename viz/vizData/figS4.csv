@@ -1,0 +1,40 @@
+q,coef,cihi,cilo,est,dim
+1,Female,-.054115701,-.24693151,-.14937496,Formality
+1,Field: Art,.40217477,-.67781323,-.13683312,Formality
+1,Field: Business,.95971048,-1.0653763,-.064580679,Formality
+1,Field: Education,.34135196,-.48926485,-.078459777,Formality
+1,Field: Government,.51722556,.2220892,.37016937,Formality
+1,Field: Linguistics,.30776453,-.31336927,-.0062948638,Formality
+1,Indigenous,.25265577,-.35806838,-.051702939,Formality
+1,Field: Medicine,.24908414,-.40375668,-.072298534,Formality
+1,Field: Religion,-.03062053,-.28077754,-.15406379,Formality
+1,Field: Natural Sciences,-.19189085,-1.0029311,-.59086603,Formality
+1,Field: Social Sciences,.23200403,-.094792336,.067144029,Formality
+1,Field: Traveler,.026651286,-.26190501,-.1147055,Formality
+1,Translation,.47072369,.23232232,.35352144,Formality
+2,Female,.044235405,-.15653209,-.056616109,Arousal
+2,Field: Art,.0079189241,-1.087152,-.55069745,Arousal
+2,Field: Business,.69681513,-1.3551662,-.32515246,Arousal
+2,Field: Education,.38393793,-.46363163,-.041430704,Arousal
+2,Field: Government,.22404832,-.067617029,.074820355,Arousal
+2,Field: Linguistics,.17898099,-.45673734,-.13594623,Arousal
+2,Indigenous,.54005426,-.074377917,.22956006,Arousal
+2,Field: Medicine,.41293198,-.23862763,.088679001,Arousal
+2,Field: Religion,.26402494,.0012818794,.13072599,Arousal
+2,Field: Natural Sciences,.47655335,-.3637073,.045126028,Arousal
+2,Field: Social Sciences,.30858624,-.025283374,.14134294,Arousal
+2,Field: Traveler,.2230323,-.078208089,.072913535,Arousal
+2,Translation,-.061965086,-.29167414,-.17723984,Arousal
+3,Female,.26478723,.056820739,.15972088,Religiosity
+3,Field: Art,.4753522,-.61220318,-.065767564,Religiosity
+3,Field: Business,1.0633644,-.9068681,.061432682,Religiosity
+3,Field: Education,.57855183,-.25760129,.15672214,Religiosity
+3,Field: Government,.63563418,.32485765,.48069918,Religiosity
+3,Field: Linguistics,-.070835732,-.68979168,-.37644929,Religiosity
+3,Indigenous,.14024001,-.48441467,-.17293608,Religiosity
+3,Field: Medicine,.27334952,-.40322924,-.065539785,Religiosity
+3,Field: Religion,.017064057,-.24696122,-.11222669,Religiosity
+3,Field: Natural Sciences,.74582303,-.076606125,.33276498,Religiosity
+3,Field: Social Sciences,-.12322822,-.46376246,-.29019424,Religiosity
+3,Field: Traveler,-.15003146,-.45463473,-.29954764,Religiosity
+3,Translation,-.12356163,-.35654202,-.24115942,Religiosity
