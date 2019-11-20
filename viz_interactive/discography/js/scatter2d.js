@@ -2231,7 +2231,7 @@ disco.radius[0].dict[0].r = parameters.radiusScale(1);
              d_.debug.y = d_[disco.y];
              console.log(d_.debug);
 
-             document.getElementById("audio").src = disco.audio_prefix + d_.indx + ".wav";
+             document.getElementById("audio").src = disco.audio_prefix + d_.indx + ".mp3";
 
              disco.popup.forEach(function (p_) {
 
