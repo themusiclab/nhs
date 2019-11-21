@@ -72,15 +72,17 @@ track.x <- discogMap$longitude
 track.y <- discogMap$latitude
 track.mp <- NULL
 library(yarrr)
+alphas = c("Lullaby" = .9, "Healing" = .4, "Dance" = .4, "Love" = .4)
 (
 track.mp <- mp +
-  geom_point(data = discogMap, aes(x = track.x, y = track.y, fill = factor(discogMap$type)),
+  geom_point(data = discogMap, aes(x = track.x, y = track.y, fill = factor(discogMap$type), alpha = (discogMap$type)),
              shape = 21,
-             alpha = .9,
+             #alpha = .9,
              stroke = .5,
              color = "black",
              size = 2) +
   scale_fill_manual(values = palette(piratepal(palette = "google"))) +
+  scale_alpha_manual(values = alphas) +
   theme(legend.position = 'n',
         axis.line=element_blank(),
         axis.text.x=element_blank(),
