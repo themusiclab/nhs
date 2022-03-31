@@ -7,3 +7,5 @@ For those replicating analyses using the eHRAF Probability Sample File data, you
 
 ## Details
 All analyses in the paper can be reproduced with the code posted here, in R and Python. The pipeline for visualizations takes `csv` output from R, processes it in Stata, and then produces visualizations in R. Some figure elements are augmented manually (e.g., adding some labels) and/or include illustrations, so your reproduced figures will not match those in the paper exactly.
+
+[![DOI](https://zenodo.org/badge/206319619.svg)](https://zenodo.org/badge/latestdoi/206319619)
